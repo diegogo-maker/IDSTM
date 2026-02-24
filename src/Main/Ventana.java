@@ -4,13 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
+import javax.swing.*;
 
 public class Ventana extends JFrame{
 	
@@ -18,7 +12,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		this.setVisible(true);
-		this.setSize(600,600);
+		this.setSize(1000,800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -28,12 +22,12 @@ public class Ventana extends JFrame{
 		this.setLayout(null);
 		this.setResizable(false);
 		
-		//panel contenedor
+		//panel contenedor de login
 		JPanel contenedor = new JPanel();
 		contenedor.setOpaque(true);
 		contenedor.setBackground(Color.black);
 		contenedor.setSize(500,500);
-		contenedor.setLocation(50,50);
+		contenedor.setLocation(0,0);
 		contenedor.setLayout(null);
 		this.add(contenedor);
 		
@@ -94,6 +88,62 @@ public class Ventana extends JFrame{
 		
 		contenedor.repaint();
 		contenedor.revalidate();
+		
+		//contenedor para el registro
+		JPanel register_container = new JPanel();
+		register_container.setSize(500,500);
+		register_container.setLocation(500,0);
+		register_container.setOpaque(true);
+		register_container.setBackground(Color.decode("#9048C2"));
+		register_container.setLayout(null);
+		this.add(register_container);
+		
+		JLabel bio_tag = new JLabel ("Biografia");
+		bio_tag.setBounds(100,50,275,40);
+		bio_tag.setBackground(Color.white);
+		bio_tag.setHorizontalAlignment(JLabel.CENTER);
+		bio_tag.setOpaque(true);
+		bio_tag.setFont(new Font("Arial",Font.BOLD,22));
+		register_container.add(bio_tag);
+		
+		JTextArea bio = new JTextArea ();
+		bio.setBounds(100,140,275,100);
+		register_container.add(bio);
+		
+		JCheckBox sweet_option = new JCheckBox("Dulce");
+		sweet_option.setBounds(100,160,275,140);
+		register_container.add(sweet_option);
+		
+		JCheckBox salty_option = new JCheckBox("Salado");
+		salty_option.setBounds(100,160,100,20);
+		register_container.add(salty_option);
+		
+		JCheckBox healthy = new JCheckBox("Saludable");
+		healthy.setBounds(100,160,100,20);
+		healthy.setBorderPainted(true);
+		healthy.setBorder(BorderFactory.createLineBorder(Color.white));
+		//healthy.setOpaque(true);
+		register_container.add(healthy);
+		
+		JRadioButton accept_terms = new JRadioButton ("Acepto las condiciones");
+		accept_terms.setBounds(120,400,150,50);
+		register_container.add(accept_terms);
+		
+		JRadioButton reject_terms = new JRadioButton ("Rechazo las condiciones");
+		reject_terms.setBounds(290,400,150,50);
+		register_container.add(reject_terms);
+		
+		ButtonGroup terms = new ButtonGroup();
+		terms.add(accept_terms);
+		terms.add(reject_terms);
+		
+		String [] colonias= {"camino real","progreso","miramar"};
+		
+		JComboBox list = new JComboBox(colonias);
+		list.setBounds(50,50,200,40);
+		register_container.add(list);
+		
+		register_container.repaint();
 		
 	}	
 
