@@ -3,6 +3,7 @@ package Main;
 import java.awt.*;
 import javax.swing.*;
 
+
 public class Ventana extends JFrame{
 	
 	public Ventana(){
@@ -18,8 +19,8 @@ public class Ventana extends JFrame{
 		this.setLocation(200,200);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.login();
-		this.registro();		
+		this.users();
+		
 		
 	}	
 	
@@ -212,6 +213,48 @@ public class Ventana extends JFrame{
 	
 	public void users() {
 		
-	}
+		JPanel users = new JPanel();
+		users.setSize(1000,500);
+		users.setLocation(0,0);
+		users.setBackground(Color.decode("#63A8C7"));
+		users.setLayout(null);
+		this.add(users);
+		
+		JLabel users_title = new JLabel("USUARIOS");
+		users_title.setBounds(350,50,130,40);
+		users_title.setOpaque(true);
+		users_title.setFont(new Font ("Arial",Font.BOLD,22));
+		users_title.setHorizontalAlignment(JLabel.CENTER);
+		users_title.setBackground(Color.WHITE);
+		users_title.setForeground(Color.BLUE);
+		users.add(users_title);
+		
+		JButton export = new JButton ("EXPORTAR");
+		export.setBounds(30,120,120,40);
+		users.add(export);
+		
+		JButton add = new JButton ("AÑADIR");
+		add.setBounds(160,120,100,40);
+		users.add(add);
+		
+		String [] table_head = {"No. Control","Nombre","Apellidos"
+								,"Semestre","Promedio","Acciones"};
+		
+		String[][] table_contend = {
+			    {"2024001", "Juan", "Pérez López", "2°", "8.7", "Editar / Eliminar"},
+			    {"2024002", "María", "Gómez Hernández", "4°", "9.1", "Editar / Eliminar"},
+			    {"2024003", "Carlos", "Ramírez Torres", "6°", "7.9", "Editar / Eliminar"},
+			    {"2024004", "Ana", "Martínez Cruz", "1°", "9.5", "Editar / Eliminar"}
+			};
+		
+		JTable users_table = new JTable(table_contend,table_head);	
+		JScrollPane scrollpane = new JScrollPane(users_table);
+		
+		scrollpane.setSize(800,100);
+		scrollpane.setLocation(30,180);
+		users.add(scrollpane);
+			
+		users.repaint();
+	}	
 
 }
