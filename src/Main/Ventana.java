@@ -1,9 +1,6 @@
 package Main;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class Ventana extends JFrame{
@@ -19,8 +16,14 @@ public class Ventana extends JFrame{
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("LOGIN");
 		this.setLocation(200,200);
-		this.setLayout(null);
 		this.setResizable(false);
+		this.setLayout(null);
+		this.login();
+		this.registro();		
+		
+	}	
+	
+	public void login() {
 		
 		//panel contenedor de login
 		JPanel contenedor = new JPanel();
@@ -88,6 +91,11 @@ public class Ventana extends JFrame{
 		
 		contenedor.repaint();
 		contenedor.revalidate();
+		
+	}
+	
+	public void registro() {
+
 		
 		//contenedor para el registro
 		JPanel register_container = new JPanel();
@@ -200,6 +208,10 @@ public class Ventana extends JFrame{
 		
 		register_container.repaint();
 		
-	}	
+	}
+	
+	public void users() {
+		
+	}
 
 }
