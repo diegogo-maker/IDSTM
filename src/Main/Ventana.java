@@ -9,8 +9,8 @@ public class Ventana extends JFrame{
 	public Ventana(){
 		
 		//configuracion de ventana
-		this.setVisible(true);
-		this.setSize(500,530);
+		
+		this.setSize(1000,800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -19,7 +19,33 @@ public class Ventana extends JFrame{
 		this.setLocation(200,200);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.calculadora();
+		
+		JMenuBar barra = new JMenuBar();		
+		JMenu archivo = new JMenu("Archivo");
+		JMenuItem open = new JMenuItem("Abrir");
+		JMenuItem close = new JMenuItem("Cerrar");
+		JMenuItem newfile = new JMenuItem("Nuevo");
+		JMenuItem save = new JMenuItem("Guardar");
+		
+		archivo.add(open);
+		archivo.add(close);
+		archivo.add(newfile);
+		archivo.add(save);
+		barra.add(archivo);
+		
+		JMenu submenu = new JMenu ("Otros");
+		archivo.addSeparator();
+		
+		JMenuItem menuItem = new JMenuItem("Item de submenu");
+		submenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Otro item");
+		submenu.add(menuItem);
+		archivo.add(submenu);
+		
+		this.setJMenuBar(barra);		
+		this.setVisible(true);
+		this.users();
 		
 	}	
 	
