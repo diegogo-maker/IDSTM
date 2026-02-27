@@ -10,7 +10,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		this.setVisible(true);
-		this.setSize(1050,800);
+		this.setSize(500,530);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -19,8 +19,7 @@ public class Ventana extends JFrame{
 		this.setLocation(200,200);
 		this.setResizable(false);
 		this.setLayout(null);
-		this.users();
-		
+		this.calculadora();
 		
 	}	
 	
@@ -255,6 +254,172 @@ public class Ventana extends JFrame{
 		users.add(scrollpane);
 			
 		users.repaint();
-	}	
+	}
+	
+	public void calculadora() {
+		
+		JPanel calculadora = new JPanel();
+		calculadora.setSize(500,500);
+		calculadora.setLocation(0,0);
+		calculadora.setBackground(Color.black);
+		calculadora.setLayout(null);
+		this.add(calculadora);
+		
+		JLabel pantalla = new JLabel ("250.00");
+		pantalla.setSize(480,70);
+		pantalla.setLocation(10,10);
+		pantalla.setOpaque(true);
+		pantalla.setFont(new Font ("Arial",Font.BOLD,50));
+		pantalla.setHorizontalAlignment(JLabel.CENTER);
+		pantalla.setBackground(Color.black);
+		pantalla.setForeground(Color.white);
+		calculadora.add(pantalla);
+		
+		JButton borrar = new JButton("CE");
+		borrar.setSize(110,70);
+		borrar.setLocation(10,90);
+		borrar.setFont(new Font ("Arial",Font.BOLD,22));
+		borrar.setBackground(Color.decode("#2E7694"));
+		borrar.setForeground(Color.white);
+		calculadora.add(borrar);
+		
+		JButton historial = new JButton("Historial");
+		historial.setSize(350,70);
+		historial.setLocation(130,90);
+		historial.setFont(new Font ("Arial",Font.BOLD,22));
+		historial.setBackground(Color.decode("#2E7694"));
+		historial.setForeground(Color.white);
+		calculadora.add(historial);
+		
+		JButton siete = new JButton("7");
+		siete.setSize(110,70);
+		siete.setLocation(10,170);
+		siete.setFont(new Font ("Arial",Font.BOLD,22));
+		siete.setBackground(Color.decode("#2B2A2A"));
+		siete.setForeground(Color.white);
+		calculadora.add(siete);
+		
+		JButton ocho = new JButton("8");
+		ocho.setSize(110,70);
+		ocho.setLocation(130,170);
+		ocho.setFont(new Font ("Arial",Font.BOLD,22));
+		ocho.setBackground(Color.decode("#2B2A2A"));
+		ocho.setForeground(Color.white);
+		calculadora.add(ocho);
+		
+		JButton nueve = new JButton("9");
+		nueve.setSize(110,70);
+		nueve.setLocation(250,170);
+		nueve.setFont(new Font ("Arial",Font.BOLD,22));
+		nueve.setBackground(Color.decode("#2B2A2A"));
+		nueve.setForeground(Color.white);
+		calculadora.add(nueve);
+		
+		JButton div = new JButton("/");
+		div.setSize(110,70);
+		div.setLocation(370,170);
+		div.setFont(new Font ("Arial",Font.BOLD,22));
+		div.setBackground(Color.decode("#911447"));
+		div.setForeground(Color.white);
+		calculadora.add(div);
+		
+		JButton cuatro = new JButton("4");
+		cuatro.setSize(110,70);
+		cuatro.setLocation(10,250);
+		cuatro.setFont(new Font ("Arial",Font.BOLD,22));
+		cuatro.setBackground(Color.decode("#2B2A2A"));
+		cuatro.setForeground(Color.white);
+		calculadora.add(cuatro);
+		
+		JButton cinco = new JButton("5");
+		cinco.setSize(110,70);
+		cinco.setLocation(130,250);
+		cinco.setFont(new Font ("Arial",Font.BOLD,22));
+		cinco.setBackground(Color.decode("#2B2A2A"));
+		cinco.setForeground(Color.white);
+		calculadora.add(cinco);
+		
+		JButton seis = new JButton("6");
+		seis.setSize(110,70);
+		seis.setLocation(250,250);
+		seis.setFont(new Font ("Arial",Font.BOLD,22));
+		seis.setBackground(Color.decode("#2B2A2A"));
+		seis.setForeground(Color.white);
+		calculadora.add(seis);
+		
+		JButton multi = new JButton("*");
+		multi.setSize(110,70);
+		multi.setLocation(370,250);
+		multi.setFont(new Font ("Arial",Font.BOLD,22));
+		multi.setBackground(Color.decode("#911447"));
+		multi.setForeground(Color.white);
+		calculadora.add(multi);
+		
+		JButton uno = new JButton("1");
+		uno.setSize(110,70);
+		uno.setLocation(10,330);
+		uno.setFont(new Font ("Arial",Font.BOLD,22));
+		uno.setBackground(Color.decode("#2B2A2A"));
+		uno.setForeground(Color.white);
+		calculadora.add(uno);
+		
+		JButton dos = new JButton("2");
+		dos.setSize(110,70);
+		dos.setLocation(130,330);
+		dos.setFont(new Font ("Arial",Font.BOLD,22));
+		dos.setBackground(Color.decode("#2B2A2A"));
+		dos.setForeground(Color.white);
+		calculadora.add(dos);
+		
+		JButton tres = new JButton("3");
+		tres.setSize(110,70);
+		tres.setLocation(250,330);
+		tres.setFont(new Font ("Arial",Font.BOLD,22));
+		tres.setBackground(Color.decode("#2B2A2A"));
+		tres.setForeground(Color.white);
+		calculadora.add(tres);
+		
+		JButton menos = new JButton("-");
+		menos.setSize(110,70);
+		menos.setLocation(370,330);
+		menos.setFont(new Font ("Arial",Font.BOLD,22));
+		menos.setBackground(Color.decode("#911447"));
+		menos.setForeground(Color.white);
+		calculadora.add(menos);
+		
+		JButton cero = new JButton("0");
+		cero.setSize(110,70);
+		cero.setLocation(10,410);
+		cero.setFont(new Font ("Arial",Font.BOLD,22));
+		cero.setBackground(Color.decode("#2B2A2A"));
+		cero.setForeground(Color.white);
+		calculadora.add(cero);
+		
+		JButton punto = new JButton(".");
+		punto.setSize(110,70);
+		punto.setLocation(130,410);
+		punto.setFont(new Font ("Arial",Font.BOLD,22));
+		punto.setBackground(Color.decode("#2B2A2A"));
+		punto.setForeground(Color.white);
+		calculadora.add(punto);
+		
+		JButton igual = new JButton("=");
+		igual.setSize(110,70);
+		igual.setLocation(250,410);
+		igual.setFont(new Font ("Arial",Font.BOLD,22));
+		igual.setBackground(Color.decode("#911447"));
+		igual.setForeground(Color.white);
+		calculadora.add(igual);
+		
+		JButton mas = new JButton("+");
+		mas.setSize(110,70);
+		mas.setLocation(370,410);
+		mas.setFont(new Font ("Arial",Font.BOLD,22));
+		mas.setBackground(Color.decode("#911447"));
+		mas.setForeground(Color.white);
+		calculadora.add(mas);
+		
+		calculadora.repaint();
+	}
 
 }
