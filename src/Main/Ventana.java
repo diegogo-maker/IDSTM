@@ -10,7 +10,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(1000,800);
+		this.setSize(1000,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -19,6 +19,7 @@ public class Ventana extends JFrame{
 		this.setLocation(200,200);
 		this.setResizable(false);
 		this.setLayout(null);
+		
 		
 		JMenuBar barra = new JMenuBar();		
 		JMenu archivo = new JMenu("Archivo");
@@ -43,78 +44,120 @@ public class Ventana extends JFrame{
 		submenu.add(menuItem);
 		archivo.add(submenu);
 		
-		this.setJMenuBar(barra);		
+		this.setJMenuBar(barra);				
+		
+		this.login();
 		this.setVisible(true);
-		this.users();
 		
 	}	
 	
-	public void login() {
+	public void login() {	
 		
-		//panel contenedor de login
+		// ===== PANEL LOGIN =====
 		JPanel contenedor = new JPanel();
-		contenedor.setOpaque(true);
-		contenedor.setBackground(Color.black);
-		contenedor.setSize(500,500);
-		contenedor.setLocation(0,0);
+		contenedor.setBackground(Color.decode("#F5F5F5")); 
+		contenedor.setBounds(500,0,500,500);
 		contenedor.setLayout(null);
 		this.add(contenedor);
-		
-		//titulo
-		JLabel title_login = new JLabel();
-		title_login.setText("BIENVENIDO");
-		title_login.setSize(200,30);
-		title_login.setLocation(150,40); 
-		title_login.setOpaque(true);
-		title_login.setBackground(Color.PINK);
-		title_login.setForeground(Color.BLACK);
-		title_login.setFont(new Font("Times new roman",Font.BOLD,22));
+
+
+		// ===== IMAGEN DE FONDO =====
+		ImageIcon fondoImg = new ImageIcon(getClass().getResource("/Main/Imagenes/oso.jpeg"));
+		Image imgFondo = fondoImg.getImage();
+		Image imgFondoEscalada = imgFondo.getScaledInstance(500,500,Image.SCALE_SMOOTH);
+		ImageIcon fondoEscalado = new ImageIcon(imgFondoEscalada);
+
+		JLabel fondo = new JLabel(fondoEscalado);
+		fondo.setBounds(0,0,500,500);
+		this.add(fondo);
+
+
+		// ===== TITULO LOGIN =====
+		JLabel title_login = new JLabel("BEAR COMPANY");
+		title_login.setBounds(140,40,220,30);
+		title_login.setForeground(Color.decode("#333333"));
+		title_login.setFont(new Font("Serif",Font.ITALIC,30));
 		title_login.setHorizontalAlignment(JLabel.CENTER);
 		contenedor.add(title_login);
-		
-		//etiqueta usuario
-		JLabel usuarioLabel = new JLabel("Usuario:");
-		usuarioLabel.setBounds(100, 95, 120, 25);
-		usuarioLabel.setForeground(Color.PINK);
-		usuarioLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		contenedor.add(usuarioLabel);
-		
-		//usuario
-		JTextField username = new JTextField();
-		username.setSize(300,30);
-		username.setLocation(100,120); 
-		username.setFont(new Font("Arial",Font.BOLD,22));
-		contenedor.add(username);
-		
-		//etiqueta contraseña
-        JLabel Password = new JLabel("Contraseña:");
-        Password.setBounds(100, 180, 120, 25);
-        Password.setForeground(Color.PINK);
-        Password.setFont(new Font("Arial", Font.BOLD, 16));
-        contenedor.add(Password);
-        
-        //contraseña
-        JPasswordField password = new JPasswordField();
-        password.setBounds(100, 210, 300, 30); 
-        contenedor.add(password);
-        
-        // checkBox recordarme
-        JCheckBox recordar = new JCheckBox("Recordarme");
-        recordar.setBounds(100, 260, 150, 25); 
-        recordar.setBackground(Color.BLACK);
-        recordar.setForeground(Color.PINK);
-        contenedor.add(recordar);
 
-		//boton acceder
-		JButton acceder = new JButton ();
-		acceder.setText("Acceder");
-		acceder.setLocation(190,330); 
-		acceder.setSize(120,50);
-		acceder.setBackground(Color.black);
-        acceder.setForeground(Color.PINK);
-		acceder.setFont(new Font("Comic sans ms",Font.BOLD,22));
+
+		// ===== ICONO USUARIO =====
+		ImageIcon iconUser = new ImageIcon(getClass().getResource("/Main/Imagenes/user.png"));
+		Image imgUser = iconUser.getImage();
+		Image imgUserEscalada = imgUser.getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+		ImageIcon iconUserEscalado = new ImageIcon(imgUserEscalada);
+
+		JLabel iconoUser = new JLabel(iconUserEscalado);
+		iconoUser.setBounds(70,120,24,24);
+		contenedor.add(iconoUser);
+
+
+		// ===== USUARIO =====
+		JLabel usuarioLabel = new JLabel("Usuario:");
+		usuarioLabel.setBounds(100,95,120,25);
+		usuarioLabel.setForeground(Color.decode("#333333"));
+		usuarioLabel.setFont(new Font("Arial", Font.ITALIC,16));
+		contenedor.add(usuarioLabel);
+
+		JTextField username = new JTextField();
+		username.setBounds(100,120,300,30);
+		username.setFont(new Font("Arial",Font.BOLD,16));
+		username.setBorder(BorderFactory.createLineBorder(Color.decode("#CFCFCF")));
+		contenedor.add(username);
+
+
+		// ===== ICONO PASSWORD =====
+		ImageIcon iconPass = new ImageIcon(getClass().getResource("/Main/Imagenes/elcandado.png"));
+		Image img = iconPass.getImage();
+		Image imgEscalada = img.getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+		ImageIcon iconPassEscalado = new ImageIcon(imgEscalada);
+
+		JLabel iconoPass = new JLabel(iconPassEscalado);
+		iconoPass.setBounds(70,210,24,24);
+		contenedor.add(iconoPass);
+
+
+		// ===== CONTRASEÑA =====
+		JLabel Password = new JLabel("Contraseña:");
+		Password.setBounds(100,180,150,25);
+		Password.setForeground(Color.decode("#333333"));
+		Password.setFont(new Font("Arial", Font.ITALIC,16));
+		contenedor.add(Password);
+
+		JPasswordField password = new JPasswordField();
+		password.setBounds(100,210,300,30);
+		password.setFont(new Font("Arial",Font.BOLD,16));
+		password.setBorder(BorderFactory.createLineBorder(Color.decode("#CFCFCF")));
+		contenedor.add(password);
+
+
+		// ===== CHECKBOX =====
+		JCheckBox recordar = new JCheckBox("Recordarme");
+		recordar.setBounds(100,260,150,25);
+		recordar.setBackground(Color.decode("#F5F5F5"));
+		recordar.setForeground(Color.decode("#333333"));
+		recordar.setFont(new Font("Arial", Font.ITALIC,14));
+		contenedor.add(recordar);
+
+
+		// ===== OLVIDE CONTRASEÑA =====
+		JLabel olvidar = new JLabel("¿Olvidaste tu contraseña?");
+		olvidar.setBounds(250,260,200,25);
+		olvidar.setForeground(Color.decode("#666666"));
+		olvidar.setFont(new Font("Arial", Font.BOLD,13));
+		contenedor.add(olvidar);
+
+
+		// ===== BOTON =====
+		JButton acceder = new JButton("ACCEDER");
+		acceder.setBounds(170,330,160,55);
+		acceder.setBackground(Color.decode("#2F2F2F"));
+		acceder.setForeground(Color.WHITE);
+		acceder.setFont(new Font("Arial",Font.BOLD,16));
+		acceder.setFocusPainted(false);
+		acceder.setBorder(BorderFactory.createLineBorder(Color.decode("#2F2F2F")));
 		contenedor.add(acceder);
-		
+
 		contenedor.repaint();
 		contenedor.revalidate();
 		
