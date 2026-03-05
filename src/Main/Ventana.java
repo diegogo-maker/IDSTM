@@ -10,7 +10,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(515,560);
+		this.setSize(500,650);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -46,7 +46,7 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);
 		
-		this.calculadoraLayout();
+		this.calculadoraInteres();
 		
 		this.setVisible(true);
 		
@@ -494,7 +494,7 @@ public class Ventana extends JFrame{
 	
 	public void calculadoraLayout() {
 		
-		 JPanel panel_calculadora = new JPanel();
+		JPanel panel_calculadora = new JPanel();
 	    panel_calculadora.setBounds(0,0,500,500);
 	    panel_calculadora.setBackground(Color.decode("#63A8C7"));
 	    panel_calculadora.setLayout(new BorderLayout());
@@ -515,7 +515,7 @@ public class Ventana extends JFrame{
 	    panel_calculadora.add(teclado, BorderLayout.CENTER);
 
 	    JPanel flow_panel = new JPanel();
-	    flow_panel.setBackground(Color.red);
+	    //flow_panel.setBackground(Color.red);
 	    flow_panel.setLayout(new FlowLayout(FlowLayout.LEFT,40,10));
 	    flow_panel.setBackground(Color.decode("#07133D"));
 
@@ -576,5 +576,72 @@ public class Ventana extends JFrame{
 
 		panel_calculadora.repaint();
 	}
+	
+	public void calculadoraInteres() {
+	    
+	    JPanel panel_interes = new JPanel();
+	    panel_interes.setBounds(0,0,500,600);
+	    panel_interes.setBackground(Color.WHITE);
+	    panel_interes.setLayout(new BorderLayout(20,20));
+	    panel_interes.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+	    this.add(panel_interes);
+	    
+	    JLabel titulo = new JLabel("Calculando el interes");
+	    titulo.setFont(new Font("Arial", Font.BOLD, 28));
+	    titulo.setHorizontalAlignment(JLabel.LEFT);
+	    panel_interes.add(titulo, BorderLayout.NORTH);
+	    
+	    JPanel centro = new JPanel();
+	    centro.setLayout(new BorderLayout(10,10));
+	    centro.setBackground(Color.white);
+	    
+	    JPanel grid_panel = new JPanel();
+	    GridLayout mi_layout = new GridLayout(3,2,20,20);
+	    grid_panel.setLayout(mi_layout);
+	    grid_panel.setBackground(Color.decode("#314691"));
+	    grid_panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
+	    grid_panel.add(new JLabel("Capital"));
+	    grid_panel.add(new JTextField(10));
+	    
+	    grid_panel.add(new JLabel("Tiempo"));
+	    grid_panel.add(new JTextField(10));
+	    
+	    grid_panel.add(new JLabel("Tasa de interes"));
+	    grid_panel.add(new JTextField(10));
+	    
+	    JPanel panel_botones = new JPanel();
+	    panel_botones.setLayout(new FlowLayout(FlowLayout.LEFT,20,10));
+	    panel_botones.setBackground(Color.white);
+
+	    JButton calcular = new JButton("Calcular");
+	    JButton cancelar = new JButton("Cancelar");
+
+	    calcular.setPreferredSize(new Dimension(100,30));
+	    cancelar.setPreferredSize(new Dimension(100,30));
+
+	    panel_botones.add(calcular);
+	    panel_botones.add(cancelar);
+	    
+	    
+	    centro.add(grid_panel, BorderLayout.CENTER);
+	    centro.add(panel_botones, BorderLayout.SOUTH);
+	    
+	    panel_interes.add(centro, BorderLayout.CENTER);
+	    
+	    JPanel sur = new JPanel();
+	    sur.setLayout(new GridLayout(2,2,20,20));
+	    sur.setBackground(Color.decode("#314691"));
+	    sur.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+	    
+	    sur.add(new JLabel("Interes"));
+	    sur.add(new JTextField(10));
+	    
+	    sur.add(new JLabel("Monto"));
+	    sur.add(new JTextField(10));
+	    
+	    panel_interes.add(sur,BorderLayout.SOUTH);
+	    
+	    panel_interes.repaint();
+	}
 }
