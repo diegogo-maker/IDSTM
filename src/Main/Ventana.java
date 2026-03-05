@@ -10,13 +10,13 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(1000,500);
+		this.setSize(515,560);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("LOGIN");
-		this.setLocation(200,200);
+		this.setLocation(200,100);
 		this.setResizable(false);
 		this.setLayout(null);
 		
@@ -44,9 +44,10 @@ public class Ventana extends JFrame{
 		submenu.add(menuItem);
 		archivo.add(submenu);
 		
-		this.setJMenuBar(barra);				
+		this.setJMenuBar(barra);
 		
-		this.login();
+		this.calculadoraLayout();
+		
 		this.setVisible(true);
 		
 	}	
@@ -489,6 +490,91 @@ public class Ventana extends JFrame{
 		calculadora.add(mas);
 		
 		calculadora.repaint();
+	}
+	
+	public void calculadoraLayout() {
+		
+		 JPanel panel_calculadora = new JPanel();
+	    panel_calculadora.setBounds(0,0,500,500);
+	    panel_calculadora.setBackground(Color.decode("#63A8C7"));
+	    panel_calculadora.setLayout(new BorderLayout());
+	    this.add(panel_calculadora);
+
+	    JLabel pantalla = new JLabel("100.00");
+	    pantalla.setFont(new Font("Arial", Font.BOLD, 30));
+	    pantalla.setHorizontalAlignment(JLabel.RIGHT);
+	    pantalla.setOpaque(true);
+	    pantalla.setBackground(Color.white);
+	    pantalla.setForeground(Color.black);
+	    pantalla.setPreferredSize(new Dimension(500,60));
+
+	    panel_calculadora.add(pantalla, BorderLayout.NORTH);
+
+	    JPanel teclado = new JPanel();
+	    teclado.setLayout(new BorderLayout());
+	    panel_calculadora.add(teclado, BorderLayout.CENTER);
+
+	    JPanel flow_panel = new JPanel();
+	    flow_panel.setBackground(Color.red);
+	    flow_panel.setLayout(new FlowLayout(FlowLayout.LEFT,40,10));
+	    flow_panel.setBackground(Color.decode("#07133D"));
+
+	    Dimension tamaño = new Dimension(80,20);
+
+	    JButton mc = new JButton("MC");
+	    mc.setPreferredSize(tamaño);
+	    flow_panel.add(mc);
+
+	    JButton mp = new JButton("M+");
+	    mp.setPreferredSize(tamaño);
+	    flow_panel.add(mp);
+
+	    JButton div = new JButton("(");
+	    div.setPreferredSize(tamaño);
+	    flow_panel.add(div);
+
+	    JButton mult = new JButton(")");
+	    mult.setPreferredSize(tamaño);
+	    flow_panel.add(mult);
+
+	    teclado.add(flow_panel, BorderLayout.NORTH);
+
+	    JPanel grid_panel = new JPanel();
+	    grid_panel.setLayout(new GridLayout(4,3,10,10));
+	    grid_panel.setBackground(Color.decode("#314691"));
+	    grid_panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+	    grid_panel.add(new JButton("7"));
+	    grid_panel.add(new JButton("8"));
+	    grid_panel.add(new JButton("9"));
+
+	    grid_panel.add(new JButton("4"));
+	    grid_panel.add(new JButton("5"));
+	    grid_panel.add(new JButton("6"));
+
+	    grid_panel.add(new JButton("1"));
+	    grid_panel.add(new JButton("2"));
+	    grid_panel.add(new JButton("3"));
+
+	    grid_panel.add(new JButton("."));
+	    grid_panel.add(new JButton("0"));
+	    grid_panel.add(new JButton("="));
+
+	    teclado.add(grid_panel, BorderLayout.CENTER);
+
+	    JPanel operadores = new JPanel();
+	    operadores.setLayout(new GridLayout(4,1,10,10));
+	    operadores.setBackground(Color.decode("#627AD1"));
+	    operadores.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+	    
+	    operadores.add(new JButton("+"));
+	    operadores.add(new JButton("-"));
+	    operadores.add(new JButton("/"));
+	    operadores.add(new JButton("*"));
+
+	    teclado.add(operadores, BorderLayout.EAST);
+
+		panel_calculadora.repaint();
 	}
 
 }
