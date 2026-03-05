@@ -494,6 +494,7 @@ public class Ventana extends JFrame{
 	
 	public void calculadoraLayout() {
 		
+		//panel principal
 		JPanel panel_calculadora = new JPanel();
 	    panel_calculadora.setBounds(0,0,500,500);
 	    panel_calculadora.setBackground(Color.decode("#63A8C7"));
@@ -528,7 +529,7 @@ public class Ventana extends JFrame{
 	    JButton mp = new JButton("M+");
 	    mp.setPreferredSize(tamaño);
 	    flow_panel.add(mp);
-
+	    
 	    JButton div = new JButton("(");
 	    div.setPreferredSize(tamaño);
 	    flow_panel.add(div);
