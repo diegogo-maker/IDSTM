@@ -611,22 +611,21 @@ public class Ventana extends JFrame{
 	    grid_panel.add(new JTextField(10));
 	    
 	    JPanel panel_botones = new JPanel();
-	    panel_botones.setLayout(new FlowLayout(FlowLayout.LEFT,20,10));
+	    panel_botones.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
 	    panel_botones.setBackground(Color.white);
 
 	    JButton calcular = new JButton("Calcular");
 	    JButton cancelar = new JButton("Cancelar");
 
-	    calcular.setPreferredSize(new Dimension(100,30));
-	    cancelar.setPreferredSize(new Dimension(100,30));
+	    calcular.setPreferredSize(new Dimension(200,30));
+	    cancelar.setPreferredSize(new Dimension(200,30));
 
 	    panel_botones.add(calcular);
 	    panel_botones.add(cancelar);
 	    
 	    
 	    centro.add(grid_panel, BorderLayout.CENTER);
-	    centro.add(panel_botones, BorderLayout.SOUTH);
-	    
+	    centro.add(panel_botones, BorderLayout.SOUTH);    
 	    panel_interes.add(centro, BorderLayout.CENTER);
 	    
 	    JPanel sur = new JPanel();
