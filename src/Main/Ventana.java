@@ -10,7 +10,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(500,650);
+		this.setSize(1000,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -20,7 +20,13 @@ public class Ventana extends JFrame{
 		this.setResizable(false);
 		this.setLayout(null);
 		
+		// ICONO DE LA VENTANA
+		ImageIcon icono = new ImageIcon(getClass().getResource("/Main/Imagenes/logoventana.png"));
+		Image img = icono.getImage();
+		Image imgEscalada = img.getScaledInstance(64,64,Image.SCALE_SMOOTH);
+		this.setIconImage(imgEscalada);
 		
+		// Menu
 		JMenuBar barra = new JMenuBar();		
 		JMenu archivo = new JMenu("Archivo");
 		JMenuItem open = new JMenuItem("Abrir");
@@ -46,7 +52,7 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);
 		
-		this.calculadoraInteres();
+		this.login();
 		
 		this.setVisible(true);
 		
