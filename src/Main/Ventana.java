@@ -1,6 +1,11 @@
 package Main;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -52,7 +57,8 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);
 		
-		this.login();
+		//this.login();
+		this.pintar();
 		
 		this.setVisible(true);
 		
@@ -649,5 +655,60 @@ public class Ventana extends JFrame{
 	    panel_interes.add(sur,BorderLayout.SOUTH);
 	    
 	    panel_interes.repaint();
+	}
+	
+	public void pintar() {
+
+        JPanel pane = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                
+                Graphics2D g2d= (Graphics2D) g;
+                
+                g2d.drawLine(0,0,100,100);
+                
+                g2d.setColor(Color.red);
+                
+                g2d.setStroke(new BasicStroke(3));
+                
+                g2d.drawLine(200,200,500,200);
+                
+                g2d.drawRect(250, 250, 100, 100);
+                
+                g2d.setColor(Color.green);
+                
+                g2d.drawOval(400,100,90,90);
+                
+                g2d.setStroke(new BasicStroke(6));
+                
+                g2d.drawArc(250, 100, 100, 100,0,270);
+                
+                g2d.drawPolygon(new int [] {200,100,300},new int [] {100,300,500},3);
+                
+                g2d.setColor(Color.orange);
+                
+                g2d.fillRect(100,100,100,100);
+                
+                g2d.fillOval(400,200,100,100);
+                
+                g2d.fillArc(300, 100, 100, 100,0,90);
+                
+                g2d.fillPolygon(new int [] {400,300,300},new int [] {200,300,500},3);
+                
+               try {
+                // Ejemplo para cargar una imagen
+                BufferedImage image = ImageIO.read(new File("src/Main/Imagenes/logoventana.png"));
+                g2d.drawImage(image, 500, 9, null);
+               }
+               catch(IOException e) {
+            	   e.printStackTrace();
+               }
+            }
+        };
+        
+        pane.setSize(1200,700);
+        pane.setLocation(0,0);
+        this.add(pane);
 	}
 }
