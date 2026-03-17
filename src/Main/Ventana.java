@@ -15,7 +15,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(1000,500);
+		this.setSize(800,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -57,8 +57,7 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);
 		
-		//this.login();
-		this.pintar();
+		this.dibujar();
 		
 		this.setVisible(true);
 		
@@ -710,5 +709,125 @@ public class Ventana extends JFrame{
         pane.setSize(1200,700);
         pane.setLocation(0,0);
         this.add(pane);
+	}
+	
+	public void dibujar() {
+		
+		JPanel panel = new JPanel() {
+			
+		 	@Override
+	        protected void paintComponent(Graphics g) {
+		 		super.paintComponent(g);
+		 		
+		 		Graphics2D g2d = (Graphics2D) g;
+		 		
+		 		// cielo
+		 	    g2d.setColor(Color.decode("#107EAD"));
+		 	    g2d.fillRect(0,0,800,300);
+	
+		 	    // cesped
+		 	    g2d.setColor(Color.decode("#1D6E12"));
+		 	    g2d.fillRect(0,300,800,200);
+	
+		 	    // sol
+		 	    g2d.setColor(Color.decode("#E8BF00"));
+		 	    g2d.fillOval(650,50,80,80);
+	
+		 	    // nubes
+		 	    g2d.setColor(Color.WHITE);
+		 	    
+		 	    g2d.fillOval(100,70,60,40);
+		 	    g2d.fillOval(130,60,60,50);
+		 	    g2d.fillOval(160,70,60,40);
+	
+		 	    g2d.fillOval(300,80,60,40);
+		 	    g2d.fillOval(330,70,60,50);
+		 	    g2d.fillOval(360,80,60,40);
+	
+		 	    // pared
+		 	    g2d.setColor(Color.decode("#D6D60D"));
+		 	    g2d.fillRect(320,260,160,120);
+	
+		 	    // pared lado
+		 	    g2d.setColor(Color.decode("#D1B621"));
+		 	    int xCasa[] = {480,520,520,480};
+		 	    int yCasa[] = {260,240,360,380};
+		 	    g2d.fillPolygon(xCasa,yCasa,4);
+	
+		 	    // techo frente
+		 	    g2d.setColor(Color.decode("#D60D0D"));
+		 	    int xTecho[] = {300,400,500};
+		 	    int yTecho[] = {260,200,260};
+		 	    g.fillPolygon(xTecho,yTecho,3);
+	
+		 	    // techo lado
+		 	    g2d.setColor(Color.decode("#8F2222"));
+		 	    int xTecho2[] = {500,540,400};
+		 	    int yTecho2[] = {260,240,200};
+		 	    g2d.fillPolygon(xTecho2,yTecho2,3);
+	
+		 	    // chimenea
+		 	    g2d.setColor(Color.decode("#3B3535"));
+		 	    g2d.fillRect(450,210,25,50);
+	
+		 	    // puerta
+		 	    g2d.setColor(Color.decode("#3D2217"));
+		 	    g2d.fillRect(380,310,40,70);
+	
+		 	    // perilla
+		 	    g2d.setColor(Color.BLACK);
+		 	    g2d.fillOval(410,345,6,6);
+	
+		 	    // marco de la ventana
+		 	    g2d.setColor(Color.decode("#3D2217"));
+		 	    g2d.fillRect(325,285,50,50);
+
+		 	    // vidrio
+		 	    g2d.setColor(Color.WHITE);
+		 	    g2d.fillRect(330,290,40,40);
+
+		 	    // divisiones de la ventana
+		 	    g2d.setColor(Color.decode("#3D2217"));
+		 	    g2d.fillRect(348,290,4,40); 
+		 	    g2d.fillRect(330,308,40,4); 
+	
+		 	    // tronco
+		 	    g2d.setColor(Color.decode("#5A3A1B"));
+		 	    g2d.fillRect(670,300,30,90);
+
+		 	    // hojas
+		 	    g2d.setColor(Color.decode("#245C1B"));
+		 	    g2d.fillOval(610,230,100,80);
+		 	    g2d.fillOval(650,220,100,90);
+		 	    g2d.fillOval(630,190,110,90);
+		 	    g2d.fillOval(670,240,90,80);
+		 	    		 	    
+		 	    // cerca
+		 	    g2d.setColor(Color.decode("#9C4535"));
+		 	    g2d.fillRect(0,380,800,15);
+		 	    g2d.fillRect(0,410,800,15);
+		 	   
+		 	    // postes del cerco
+		 	    g2d.setColor(Color.decode("#CA7363"));
+		 	   
+		 	    g2d.fillRect(40,370,15,70);
+		 	    g2d.fillRect(120,370,15,70);
+		 	    g2d.fillRect(200,370,15,70);
+		 	    g2d.fillRect(280,370,15,70);
+		 	    g2d.fillRect(360,370,15,70);
+		 	    g2d.fillRect(440,370,15,70);
+		 	    g2d.fillRect(520,370,15,70);
+		 	    g2d.fillRect(600,370,15,70);
+		 	    g2d.fillRect(680,370,15,70);
+		 	    g2d.fillRect(760,370,15,70);
+		         
+		 	}
+			
+		};
+		
+		panel.setSize(800,500);
+        panel.setLocation(0,0);
+        this.add(panel);
+        
 	}
 }
