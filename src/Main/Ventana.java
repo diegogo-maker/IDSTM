@@ -1,6 +1,8 @@
 package Main;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(800,500);
+		this.setSize(500,550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -57,7 +59,7 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);
 		
-		this.dibujar();
+		this.registro();
 		
 		this.setVisible(true);
 		
@@ -181,7 +183,7 @@ public class Ventana extends JFrame{
 		//contenedor para el registro
 		JPanel register_container = new JPanel();
 		register_container.setSize(500,500);
-		register_container.setLocation(500,0);
+		register_container.setLocation(0,0);
 		register_container.setOpaque(true);
 		register_container.setBackground(Color.decode("#63A8C7"));
 		register_container.setLayout(null);
@@ -286,6 +288,48 @@ public class Ventana extends JFrame{
 		crearCuenta.setFont(new Font("Comic sans ms",Font.BOLD,24));
 		register_container.add(crearCuenta);
 		crearCuenta.setForeground(Color.black);
+		
+		crearCuenta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+
+				String username_val = user_field.getText();
+				if(username_val.equals("") || username_val.contains(" ") || username_val.length() < 5) {
+					user_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+				}else{
+					user_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+				}
+
+				String bio_val = bio.getText();
+				if(!bio_val.equals("") && bio_val.length() < 5) {
+					bio.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+				
+				}else{
+					bio.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+				}
+
+				if(!sweet_option.isSelected() && !salty_option.isSelected() && !healthy.isSelected()) {
+					sweet_option.setForeground(Color.red);
+					salty_option.setForeground(Color.red);
+					healthy.setForeground(Color.red);
+				
+				}else{
+					sweet_option.setForeground(Color.green);
+					salty_option.setForeground(Color.green);
+					healthy.setForeground(Color.green);
+				}
+
+				if(!accept_terms.isSelected()) {
+					accept_terms.setForeground(Color.red);
+					reject_terms.setForeground(Color.red);
+					
+				}else{
+					accept_terms.setForeground(Color.green);
+					reject_terms.setForeground(Color.black);
+				}				
+			}
+		});
 		
 		register_container.repaint();
 		
