@@ -292,19 +292,23 @@ public class Ventana extends JFrame{
 		crearCuenta.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
+
+				boolean valido = true;
 
 				String username_val = user_field.getText();
+				String bio_val = bio.getText();
+
 				if(username_val.equals("") || username_val.contains(" ") || username_val.length() < 5) {
 					user_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+					valido = false;
 				}else{
 					user_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}
 
-				String bio_val = bio.getText();
 				if(!bio_val.equals("") && bio_val.length() < 5) {
 					bio.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-				
+					valido = false;
 				}else{
 					bio.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}
@@ -313,7 +317,7 @@ public class Ventana extends JFrame{
 					sweet_option.setForeground(Color.red);
 					salty_option.setForeground(Color.red);
 					healthy.setForeground(Color.red);
-				
+					valido = false;
 				}else{
 					sweet_option.setForeground(Color.green);
 					salty_option.setForeground(Color.green);
@@ -323,11 +327,17 @@ public class Ventana extends JFrame{
 				if(!accept_terms.isSelected()) {
 					accept_terms.setForeground(Color.red);
 					reject_terms.setForeground(Color.red);
-					
+					valido = false;
 				}else{
 					accept_terms.setForeground(Color.green);
 					reject_terms.setForeground(Color.black);
-				}				
+				}
+
+				if(valido) {
+					JOptionPane.showMessageDialog(null, "Registro exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					JOptionPane.showMessageDialog(null, "Error en el formulario", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
