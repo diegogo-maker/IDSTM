@@ -17,7 +17,7 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(500,550);
+		this.setSize(1000,550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -47,6 +47,24 @@ public class Ventana extends JFrame{
 		archivo.add(save);
 		barra.add(archivo);
 		
+		JMenu cuenta = new JMenu("Cuenta");
+
+		JMenuItem irLogin = new JMenuItem("Login");
+		JMenuItem irRegistro = new JMenuItem("Registro");
+
+		cuenta.add(irLogin);
+		cuenta.add(irRegistro);
+
+		barra.add(cuenta);
+		
+		irLogin.addActionListener(e -> {
+		    this.router("login");
+		});
+
+		irRegistro.addActionListener(e -> {
+		    this.router("registro");
+		});
+		
 		JMenu submenu = new JMenu ("Otros");
 		archivo.addSeparator();
 		
@@ -59,7 +77,8 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);
 		
-		this.registro();
+		this.login();
+		//this.router("registro");
 		
 		this.setVisible(true);
 		
@@ -69,21 +88,10 @@ public class Ventana extends JFrame{
 		
 		// ===== PANEL LOGIN =====
 		JPanel contenedor = new JPanel();
-		contenedor.setBackground(Color.decode("#F5F5F5")); 
-		contenedor.setBounds(500,0,500,500);
+		contenedor.setBackground(Color.gray); 
+		contenedor.setBounds(0,0,500,500);
 		contenedor.setLayout(null);
 		this.add(contenedor);
-
-
-		// ===== IMAGEN DE FONDO =====
-		ImageIcon fondoImg = new ImageIcon(getClass().getResource("/Main/Imagenes/oso.jpeg"));
-		Image imgFondo = fondoImg.getImage();
-		Image imgFondoEscalada = imgFondo.getScaledInstance(500,500,Image.SCALE_SMOOTH);
-		ImageIcon fondoEscalado = new ImageIcon(imgFondoEscalada);
-
-		JLabel fondo = new JLabel(fondoEscalado);
-		fondo.setBounds(0,0,500,500);
-		this.add(fondo);
 
 
 		// ===== TITULO LOGIN =====
@@ -157,7 +165,7 @@ public class Ventana extends JFrame{
 		// ===== OLVIDE CONTRASEÑA =====
 		JLabel olvidar = new JLabel("¿Olvidaste tu contraseña?");
 		olvidar.setBounds(250,260,200,25);
-		olvidar.setForeground(Color.decode("#666666"));
+		olvidar.setForeground(Color.black);
 		olvidar.setFont(new Font("Arial", Font.BOLD,13));
 		contenedor.add(olvidar);
 
@@ -171,6 +179,48 @@ public class Ventana extends JFrame{
 		acceder.setFocusPainted(false);
 		acceder.setBorder(BorderFactory.createLineBorder(Color.decode("#2F2F2F")));
 		contenedor.add(acceder);
+		
+		acceder.addActionListener(e -> {
+
+		    boolean valido = true;
+
+		    String username_val = username.getText();
+		    String password_val = new String(password.getPassword());
+
+		    if(username_val.equals("") || username_val.contains(" ") || username_val.length() < 5) {
+		        username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+		        valido = false;
+		    } else {
+		        username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+		    }
+
+		    if(password_val.equals("") || password_val.length() < 5) {
+		        password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+		        valido = false;
+		    } else {
+		        password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+		    }
+
+		    if(valido) {
+		        JOptionPane.showMessageDialog(null, "Login exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+		    } else {
+		        JOptionPane.showMessageDialog(null, "Error en el login", "Error", JOptionPane.ERROR_MESSAGE);
+		    }
+
+		});
+		
+		JButton registro = new JButton("No tienes otra cuenta?");
+		registro.setLocation(100,400);
+		registro.setSize(300,50);
+		registro.setFont(new Font("Arial",Font.BOLD,22));
+		registro.setBackground(Color.black);
+		registro.setForeground(Color.white);
+		registro.setOpaque(true);
+		contenedor.add(registro);
+		
+		registro.addActionListener(e->{
+			this.router("registro");
+		});
 
 		contenedor.repaint();
 		contenedor.revalidate();
@@ -183,7 +233,7 @@ public class Ventana extends JFrame{
 		//contenedor para el registro
 		JPanel register_container = new JPanel();
 		register_container.setSize(500,500);
-		register_container.setLocation(0,0);
+		register_container.setLocation(500,0);
 		register_container.setOpaque(true);
 		register_container.setBackground(Color.decode("#63A8C7"));
 		register_container.setLayout(null);
@@ -213,10 +263,23 @@ public class Ventana extends JFrame{
 		user_field.setBounds(60,95,380,35);
 		register_container.add(user_field);
 		user_field.setForeground(Color.black);
+	
+		JLabel pass_label = new JLabel("Contraseña");
+		pass_label.setBounds(60,135,380,25);
+		pass_label.setHorizontalAlignment(JLabel.CENTER);
+		pass_label.setForeground(Color.white);
+		pass_label.setOpaque(true);
+		pass_label.setBackground(Color.decode("#206685"));
+		pass_label.setFont(new Font("Arial",Font.BOLD,22));
+		register_container.add(pass_label);
 
+		JPasswordField pass_field = new JPasswordField();
+		pass_field.setBounds(60,165,380,35);
+		pass_field.setForeground(Color.black);
+		register_container.add(pass_field);
 		
 		JLabel bio_tag = new JLabel("Biografia");
-		bio_tag.setBounds(60,140,380,35);
+		bio_tag.setBounds(60,200,380,25);
 		bio_tag.setBackground(Color.decode("#206685"));
 		bio_tag.setHorizontalAlignment(JLabel.CENTER);
 		bio_tag.setOpaque(true);
@@ -225,13 +288,13 @@ public class Ventana extends JFrame{
 		bio_tag.setForeground(Color.white);
 
 		JTextArea bio = new JTextArea();
-		bio.setBounds(60,180,380,80);
+		bio.setBounds(60,230,380,40);     
 		register_container.add(bio);
 		bio.setForeground(Color.black);
 
 	
 		JLabel pref_label = new JLabel("Preferencias");
-		pref_label.setBounds(60,270,380,30);
+		pref_label.setBounds(60,280,380,30);
 		pref_label.setHorizontalAlignment(JLabel.CENTER);
 		pref_label.setFont(new Font("Arial",Font.BOLD,18));
 		pref_label.setForeground(Color.white);
@@ -284,10 +347,13 @@ public class Ventana extends JFrame{
 
 
 		JButton crearCuenta = new JButton("Crear cuenta");
-		crearCuenta.setBounds(60,425,380,50);
-		crearCuenta.setFont(new Font("Comic sans ms",Font.BOLD,24));
+		crearCuenta.setBounds(60,425,180,50);
+		crearCuenta.setFont(new Font("Arial",Font.BOLD,16));
+		crearCuenta.setBackground(Color.decode("#1B1461"));
+		crearCuenta.setForeground(Color.white);
+		crearCuenta.setOpaque(true);
+		crearCuenta.setForeground(Color.white);
 		register_container.add(crearCuenta);
-		crearCuenta.setForeground(Color.black);
 		
 		crearCuenta.addActionListener(new ActionListener() {
 
@@ -338,7 +404,28 @@ public class Ventana extends JFrame{
 				}else{
 					JOptionPane.showMessageDialog(null, "Error en el formulario", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				String pass_val = new String(pass_field.getPassword());
+
+				if(pass_val.equals("") || pass_val.length() < 5) {
+				    pass_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+				    valido = false;
+				} else {
+				    pass_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+				}
 			}
+		});
+		
+		JButton cancelar = new JButton("Cancelar");
+		cancelar.setBounds(260,425,180,50);
+		cancelar.setFont(new Font("Arial",Font.BOLD,16));
+		cancelar.setBackground(Color.decode("#851111")); 
+		cancelar.setForeground(Color.white);
+		cancelar.setOpaque(true);
+		register_container.add(cancelar);
+
+		cancelar.addActionListener(e -> {
+		    this.router("login");
 		});
 		
 		register_container.repaint();
@@ -883,5 +970,20 @@ public class Ventana extends JFrame{
         panel.setLocation(0,0);
         this.add(panel);
         
+	}
+	
+	public void router(String target) {
+		
+		this.getContentPane().removeAll();
+		
+		if (target.equals("login")) 
+			this.login();
+		
+		if(target.equals("registro"))
+			this.registro();
+		
+		this.setVisible(true);
+		this.repaint();
+		this.revalidate();
 	}
 }
