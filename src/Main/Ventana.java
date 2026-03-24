@@ -11,13 +11,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
+
 public class Ventana extends JFrame{
 	
 	public Ventana(){
 		
 		//configuracion de ventana
 		
-		this.setSize(800,500);
+		this.setSize(500,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -77,7 +78,7 @@ public class Ventana extends JFrame{
 		
 		//this.setJMenuBar(barra);
 		
-		this.marioBros();
+		this.examen2();
 		//this.router("registro");
 		
 		this.setVisible(true);
@@ -1127,4 +1128,152 @@ public class Ventana extends JFrame{
 	    panel.setLocation(0,0);
 	    this.add(panel);
 	}
+	
+	public void examen2() {
+
+	    setTitle("Factura en Java");
+	    setSize(500, 600);
+	    setLocationRelativeTo(null);
+	    setDefaultCloseOperation(EXIT_ON_CLOSE);
+	    setLayout(new BorderLayout());
+
+	    getContentPane().setBackground(Color.decode("#EAF4FF"));
+
+	    JLabel titulo = new JLabel("Factura en Java - ArrayList y POO");
+	    titulo.setOpaque(true);
+	    titulo.setBackground(Color.decode("#64B5F6"));
+	    titulo.setForeground(Color.WHITE);
+	    titulo.setFont(new Font("Arial", Font.BOLD, 18));
+	    titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    add(titulo, BorderLayout.NORTH);
+
+	    JPanel centro = new JPanel(new BorderLayout());
+	    centro.setBackground(Color.decode("#EAF4FF"));
+
+	    JPanel cliente = new JPanel(new GridLayout(2, 4, 5, 5));
+	    cliente.setBorder(BorderFactory.createTitledBorder("Datos del cliente"));
+	    cliente.setBackground(Color.decode("#EAF4FF"));
+
+	    cliente.add(new JLabel("Documento:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    cliente.add(new JTextField());
+
+	    cliente.add(new JLabel("Nombres:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    cliente.add(new JTextField());
+
+	    cliente.add(new JLabel("Direccion:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    cliente.add(new JTextField());
+
+	    cliente.add(new JLabel("Telefono:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    cliente.add(new JTextField());
+
+	    JPanel factura = new JPanel(new GridLayout(1, 4, 5, 5));
+	    factura.setBorder(BorderFactory.createTitledBorder("Datos de factura"));
+	    factura.setBackground(Color.decode("#EAF4FF"));
+
+	    factura.add(new JLabel("No. Factura:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    factura.add(new JLabel("1"));
+
+	    factura.add(new JLabel("Fecha:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    factura.add(new JLabel("2021/05/21"));
+
+	    JPanel botones = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	    botones.setBackground(Color.decode("#EAF4FF"));
+
+	    JButton ver = new JButton("Ver listado");
+	    JButton añadir = new JButton("Añadir");
+	    JButton eliminar = new JButton("Eliminar");
+
+	    ver.setPreferredSize(new Dimension(145, 35));
+	    añadir.setPreferredSize(new Dimension(145, 35));
+	    eliminar.setPreferredSize(new Dimension(145, 35));
+
+	    ver.setBackground(Color.decode("#64B5F6"));
+	    añadir.setBackground(Color.decode("#64B5F6"));
+	    eliminar.setBackground(Color.decode("#64B5F6"));
+
+	    ver.setForeground(Color.WHITE);
+	    añadir.setForeground(Color.WHITE);
+	    eliminar.setForeground(Color.WHITE);
+
+	    ver.setFont(new Font("Arial", Font.BOLD, 13));
+	    añadir.setFont(new Font("Arial", Font.BOLD, 13));
+	    eliminar.setFont(new Font("Arial", Font.BOLD, 13));
+
+	    botones.add(ver);
+	    botones.add(añadir);
+	    botones.add(eliminar);
+
+	    String[] columnas = {"Producto", "Cantidad", "Valor", "SubTotal"};
+
+	    String[][] datos = {
+	            {"Agua", "2", "500.00", "1000.00"},
+	            {"Cereal", "5", "1000.00", "5000.00"},
+	            {"Leche", "2", "300.00", "600.00"}
+	    };
+
+	    JTable tabla = new JTable(datos, columnas);
+	    tabla.setFont(new Font("Arial", Font.PLAIN, 13));
+	    tabla.setRowHeight(22);
+	    tabla.setBackground(Color.WHITE);
+	    tabla.setSelectionBackground(Color.decode("#BBDEFB"));
+
+	    JScrollPane scroll = new JScrollPane(tabla);
+	    scroll.setBorder(BorderFactory.createTitledBorder("Productos"));
+	    scroll.setPreferredSize(new Dimension(450, 200));
+
+	    JPanel totales = new JPanel(new GridLayout(4, 2, 5, 5));
+	    totales.setBorder(BorderFactory.createTitledBorder("Totales"));
+	    totales.setBackground(Color.decode("#EAF4FF"));
+
+	    totales.add(new JLabel("Subtotal:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    totales.add(new JLabel("6600.00"));
+
+	    totales.add(new JLabel("% Descuento:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    totales.add(new JTextField("5.00"));
+
+	    totales.add(new JLabel("IVA 19%:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    totales.add(new JLabel("1254.00"));
+
+	    totales.add(new JLabel("Total:")).setFont(new Font("Arial", Font.PLAIN, 13));
+	    totales.add(new JLabel("7524.00"));
+
+	    JPanel arriba = new JPanel(new GridLayout(3, 1, 10, 10));
+	    arriba.setBackground(Color.decode("#EAF4FF"));
+	    arriba.add(cliente);
+	    arriba.add(factura);
+	    arriba.add(botones);
+
+	    JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
+	    panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    panelPrincipal.setBackground(Color.decode("#EAF4FF"));
+
+	    panelPrincipal.add(arriba, BorderLayout.NORTH);
+	    panelPrincipal.add(scroll, BorderLayout.CENTER);
+	    panelPrincipal.add(totales, BorderLayout.SOUTH);
+
+	    centro.add(panelPrincipal, BorderLayout.CENTER);
+
+	    add(centro, BorderLayout.CENTER);
+
+	    JPanel acciones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	    acciones.setBackground(Color.decode("#64B5F6"));
+
+	    JButton finalizar = new JButton("Finalizar factura");
+	    JButton limpiar = new JButton("Limpiar");
+
+	    finalizar.setBackground(Color.decode("#143D63"));
+	    finalizar.setForeground(Color.WHITE);
+	    finalizar.setFont(new Font("Arial", Font.BOLD, 13));
+
+	    limpiar.setBackground(Color.decode("#143D63"));
+	    limpiar.setForeground(Color.WHITE);
+	    limpiar.setFont(new Font("Arial", Font.BOLD, 13));
+
+	    acciones.add(finalizar);
+	    acciones.add(limpiar);
+
+	    add(acciones, BorderLayout.SOUTH);
+	    
+	}
+	
 }
