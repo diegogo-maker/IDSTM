@@ -10,15 +10,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
-
 public class Ventana extends JFrame{
 	
 	public Ventana(){
 		
 		//configuracion de ventana
 		
-		this.setSize(500,600);
+		this.setSize(1000,550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
@@ -34,52 +32,10 @@ public class Ventana extends JFrame{
 		Image imgEscalada = img.getScaledInstance(64,64,Image.SCALE_SMOOTH);
 		this.setIconImage(imgEscalada);
 		
-		// Menu
-		JMenuBar barra = new JMenuBar();		
-		JMenu archivo = new JMenu("Archivo");
-		JMenuItem open = new JMenuItem("Abrir");
-		JMenuItem close = new JMenuItem("Cerrar");
-		JMenuItem newfile = new JMenuItem("Nuevo");
-		JMenuItem save = new JMenuItem("Guardar");
-		
-		archivo.add(open);
-		archivo.add(close);
-		archivo.add(newfile);
-		archivo.add(save);
-		barra.add(archivo);
-		
-		JMenu cuenta = new JMenu("Cuenta");
+		this.menu();
 
-		JMenuItem irLogin = new JMenuItem("Login");
-		JMenuItem irRegistro = new JMenuItem("Registro");
-
-		cuenta.add(irLogin);
-		cuenta.add(irRegistro);
-
-		barra.add(cuenta);
-		
-		irLogin.addActionListener(e -> {
-		    this.router("login");
-		});
-
-		irRegistro.addActionListener(e -> {
-		    this.router("registro");
-		});
-		
-		JMenu submenu = new JMenu ("Otros");
-		archivo.addSeparator();
-		
-		JMenuItem menuItem = new JMenuItem("Item de submenu");
-		submenu.add(menuItem);
-		
-		menuItem = new JMenuItem("Otro item");
-		submenu.add(menuItem);
-		archivo.add(submenu);
-		
-		//this.setJMenuBar(barra);
-		
-		this.examen2();
-		//this.router("registro");
+		this.router("registro");
+		this.router("recuperar");
 		
 		this.setVisible(true);
 		
@@ -173,7 +129,7 @@ public class Ventana extends JFrame{
 
 		// ===== BOTON =====
 		JButton acceder = new JButton("ACCEDER");
-		acceder.setBounds(170,330,160,55);
+		acceder.setBounds(170,310,160,55);
 		acceder.setBackground(Color.decode("#2F2F2F"));
 		acceder.setForeground(Color.WHITE);
 		acceder.setFont(new Font("Arial",Font.BOLD,16));
@@ -211,7 +167,7 @@ public class Ventana extends JFrame{
 		});
 		
 		JButton registro = new JButton("No tienes otra cuenta?");
-		registro.setLocation(100,400);
+		registro.setLocation(100,380);
 		registro.setSize(300,50);
 		registro.setFont(new Font("Arial",Font.BOLD,22));
 		registro.setBackground(Color.black);
@@ -221,6 +177,19 @@ public class Ventana extends JFrame{
 		
 		registro.addActionListener(e->{
 			this.router("registro");
+		});
+		
+		JButton recuperar = new JButton("Desea recuperar la cuenta?");
+		recuperar.setLocation(50,440);
+		recuperar.setSize(400,50);
+		recuperar.setFont(new Font("Arial",Font.BOLD,22));
+		recuperar.setBackground(Color.black);
+		recuperar.setForeground(Color.white);
+		recuperar.setOpaque(true);
+		contenedor.add(recuperar);
+		
+		recuperar.addActionListener(e->{
+			this.router("recuperar");
 		});
 
 		contenedor.repaint();
@@ -431,6 +400,42 @@ public class Ventana extends JFrame{
 		
 		register_container.repaint();
 		
+	}
+	
+	public void recuperar() {
+
+		// ===== PANEL LOGIN =====
+		JPanel contenedor = new JPanel();
+		contenedor.setBackground(Color.gray); 
+		contenedor.setBounds(0,0,500,500);
+		contenedor.setLayout(null);
+		this.add(contenedor);
+
+
+		// ===== TITULO LOGIN =====
+		JLabel title_login = new JLabel("Recuperar cuenta");
+		title_login.setBounds(50,220,400,30);
+		title_login.setForeground(Color.decode("#333333"));
+		title_login.setFont(new Font("Arial",Font.BOLD,30));
+		title_login.setHorizontalAlignment(JLabel.CENTER);
+		contenedor.add(title_login);
+
+		
+		JButton registro = new JButton("Volver");
+		registro.setLocation(100,350);
+		registro.setSize(300,50);
+		registro.setFont(new Font("Arial",Font.BOLD,22));
+		registro.setBackground(Color.black);
+		registro.setForeground(Color.white);
+		registro.setOpaque(true);
+		contenedor.add(registro);
+		
+		registro.addActionListener(e->{
+			this.router("login");
+		});
+
+		contenedor.repaint();
+		contenedor.revalidate();
 	}
 	
 	public void users() {
@@ -983,9 +988,111 @@ public class Ventana extends JFrame{
 		if(target.equals("registro"))
 			this.registro();
 		
+		if(target.equals("recuperar"))
+			this.recuperar();
+		
 		this.setVisible(true);
 		this.repaint();
 		this.revalidate();
+	}
+	
+	public void menu() {
+		
+		// Menu
+		JMenuBar barra = new JMenuBar();		
+		JMenu archivo = new JMenu("Archivo");
+		JMenuItem open = new JMenuItem("Abrir");
+		JMenuItem close = new JMenuItem("Cerrar");
+		JMenuItem newfile = new JMenuItem("Nuevo");
+		JMenuItem save = new JMenuItem("Guardar");
+		
+		archivo.add(open);
+		archivo.add(close);
+		archivo.add(newfile);
+		archivo.add(save);
+		barra.add(archivo);
+		
+		JMenu cuenta = new JMenu("Cuenta");
+
+		JMenuItem irLogin = new JMenuItem("Login");
+		JMenuItem irRegistro = new JMenuItem("Registro");
+		JMenuItem recuperar = new JMenuItem("Recuperar cuenta");
+		
+		JMenu usuarios = new JMenu("Usuarios");
+
+		JMenuItem alta = new JMenuItem("Alta");
+		JMenuItem baja = new JMenuItem("Baja");
+		JMenuItem consultar = new JMenuItem("Consultar");
+		
+		JMenu ayuda = new JMenu("Ayuda");
+
+		JMenuItem crear = new JMenuItem("¿Como crear un usuario?");
+		JMenuItem entrar = new JMenuItem("¿Como acceder al sistema?");
+		JMenuItem olvide = new JMenuItem("¿Que pasa si olvide mi contraseña?");
+
+		cuenta.add(irLogin);
+		cuenta.add(irRegistro);
+		cuenta.add(recuperar);
+		
+		usuarios.add(alta);
+		usuarios.add(baja);
+		usuarios.add(consultar);
+		
+		ayuda.add(crear);
+		ayuda.add(entrar);
+		ayuda.add(olvide);
+
+		barra.add(cuenta);
+		barra.add(usuarios);
+		barra.add(ayuda);
+		
+		irLogin.addActionListener(e -> {
+		    this.router("login");
+		});
+
+		irRegistro.addActionListener(e -> {
+		    this.router("registro");
+		});
+		
+		recuperar.addActionListener(e -> {
+		    this.router("recuperar");
+		});
+		
+		alta.addActionListener(e -> {
+		    this.router("alta");
+		});
+
+		baja.addActionListener(e -> {
+		    this.router("baja");
+		});
+		
+		consultar.addActionListener(e -> {
+		    this.router("consultar");
+		});
+		
+		crear.addActionListener(e -> {
+		    this.router("crear");
+		});
+
+		entrar.addActionListener(e -> {
+		    this.router("entrar");
+		});
+		
+		olvide.addActionListener(e -> {
+		    this.router("olvide");
+		});	
+			
+		JMenu submenu = new JMenu ("Otros");
+		archivo.addSeparator();
+		
+		JMenuItem menuItem = new JMenuItem("Item de submenu");
+		submenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Otro item");
+		submenu.add(menuItem);
+		archivo.add(submenu);
+		
+		this.setJMenuBar(barra);
 	}
 	
 	public void marioBros() {
