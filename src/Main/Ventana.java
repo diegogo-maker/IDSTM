@@ -34,8 +34,7 @@ public class Ventana extends JFrame{
 		
 		this.menu();
 
-		this.router("registro");
-		this.router("recuperar");
+		this.router("login");
 		
 		this.setVisible(true);
 		
@@ -404,38 +403,40 @@ public class Ventana extends JFrame{
 	
 	public void recuperar() {
 
-		// ===== PANEL LOGIN =====
-		JPanel contenedor = new JPanel();
-		contenedor.setBackground(Color.gray); 
-		contenedor.setBounds(0,0,500,500);
-		contenedor.setLayout(null);
-		this.add(contenedor);
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#CFCF46")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
 
+	    JLabel titulo = new JLabel("RECUPERAR CONTRASEÑA");
+	    titulo.setBounds(50,50,400,40);
+	    titulo.setFont(new Font("Arial",Font.BOLD,24));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
 
-		// ===== TITULO LOGIN =====
-		JLabel title_login = new JLabel("Recuperar cuenta");
-		title_login.setBounds(50,220,400,30);
-		title_login.setForeground(Color.decode("#333333"));
-		title_login.setFont(new Font("Arial",Font.BOLD,30));
-		title_login.setHorizontalAlignment(JLabel.CENTER);
-		contenedor.add(title_login);
+	    JLabel correoLabel = new JLabel("Correo:");
+	    correoLabel.setBounds(100,150,300,25);
+	    contenedor.add(correoLabel);
 
-		
-		JButton registro = new JButton("Volver");
-		registro.setLocation(100,350);
-		registro.setSize(300,50);
-		registro.setFont(new Font("Arial",Font.BOLD,22));
-		registro.setBackground(Color.black);
-		registro.setForeground(Color.white);
-		registro.setOpaque(true);
-		contenedor.add(registro);
-		
-		registro.addActionListener(e->{
-			this.router("login");
-		});
+	    JTextField correo = new JTextField();
+	    correo.setBounds(100,180,300,30);
+	    contenedor.add(correo);
 
-		contenedor.repaint();
-		contenedor.revalidate();
+	    JButton recuperar = new JButton("Recuperar");
+	    recuperar.setBounds(100,250,300,40);
+	    contenedor.add(recuperar);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,320,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
 	}
 	
 	public void users() {
@@ -979,21 +980,48 @@ public class Ventana extends JFrame{
 	}
 	
 	public void router(String target) {
-		
-		this.getContentPane().removeAll();
-		
-		if (target.equals("login")) 
-			this.login();
-		
-		if(target.equals("registro"))
-			this.registro();
-		
-		if(target.equals("recuperar"))
-			this.recuperar();
-		
-		this.setVisible(true);
-		this.repaint();
-		this.revalidate();
+
+	    this.getContentPane().removeAll();
+
+	    if(target.equals("login")) {
+	        this.login();
+	    }
+
+	    if(target.equals("registro")) {
+	        this.registro();
+	    }
+
+	    if(target.equals("recuperar")) {
+	        this.recuperar();
+	    }
+
+	    if(target.equals("alta")) {
+	        this.alta();
+	    }
+
+	    if(target.equals("baja")) {
+	        this.baja();
+	    }
+
+	    if(target.equals("consultar")) {
+	        this.consultar();
+	    }
+
+	    if(target.equals("crear")) {
+	        this.crear();
+	    }
+
+	    if(target.equals("entrar")) {
+	        this.entrar();
+	    }
+
+	    if(target.equals("olvide")) {
+	        this.olvide();
+	    }
+
+	    this.setVisible(true);
+	    this.repaint();
+	    this.revalidate();
 	}
 	
 	public void menu() {
@@ -1049,7 +1077,7 @@ public class Ventana extends JFrame{
 		irLogin.addActionListener(e -> {
 		    this.router("login");
 		});
-
+		
 		irRegistro.addActionListener(e -> {
 		    this.router("registro");
 		});
@@ -1093,6 +1121,244 @@ public class Ventana extends JFrame{
 		archivo.add(submenu);
 		
 		this.setJMenuBar(barra);
+	}
+	
+	public void alta() {
+
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#3CAB7E")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
+
+	    JLabel titulo = new JLabel("ALTA DE USUARIO");
+	    titulo.setBounds(50,20,400,30);
+	    titulo.setFont(new Font("Arial",Font.BOLD,26));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
+
+	    JLabel nombreLabel = new JLabel("Nombre:");
+	    nombreLabel.setBounds(100,80,300,25);
+	    contenedor.add(nombreLabel);
+
+	    JTextField nombre = new JTextField();
+	    nombre.setBounds(100,110,300,30);
+	    contenedor.add(nombre);
+
+	    JLabel correoLabel = new JLabel("Correo:");
+	    correoLabel.setBounds(100,150,300,25);
+	    contenedor.add(correoLabel);
+
+	    JTextField correo = new JTextField();
+	    correo.setBounds(100,180,300,30);
+	    contenedor.add(correo);
+
+	    JButton guardar = new JButton("Guardar");
+	    guardar.setBounds(100,230,300,40);
+	    contenedor.add(guardar);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,290,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
+	}
+	
+	public void baja() {
+
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#DB5539")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
+
+	    JLabel titulo = new JLabel("BAJA DE USUARIO");
+	    titulo.setBounds(50,20,400,30);
+	    titulo.setFont(new Font("Arial",Font.BOLD,26));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
+
+	    JLabel seleccionar = new JLabel("Selecciona usuario:");
+	    seleccionar.setBounds(100,80,300,25);
+	    contenedor.add(seleccionar);
+
+	    String[] usuarios = {"Diego121@gmail.com", "Ana341@gmail.com", "Luis163@gmail.com"};
+	    JComboBox lista = new JComboBox(usuarios);
+	    lista.setBounds(100,110,300,30);
+	    contenedor.add(lista);
+
+	    JButton eliminar = new JButton("Eliminar");
+	    eliminar.setBounds(100,170,300,40);
+	    contenedor.add(eliminar);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,230,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
+	}
+	
+	public void consultar() {
+
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#478A29")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
+
+	    JLabel titulo = new JLabel("CONSULTAR USUARIOS");
+	    titulo.setBounds(50,20,400,30);
+	    titulo.setFont(new Font("Arial",Font.BOLD,24));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
+
+	    String[] columnas = {"Usuario", "Correo"};
+	    String[][] datos = {
+	        {"Diego123", "diego1@gmail.com"},
+	        {"Ana456", "ana232@gmail.com"}
+	    };
+
+	    JTable tabla = new JTable(datos, columnas);
+	    JScrollPane scroll = new JScrollPane(tabla);
+	    scroll.setBounds(50,80,400,200);
+	    contenedor.add(scroll);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,320,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
+	}
+	
+	public void crear() {
+
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#1B6A82")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
+
+	    JLabel titulo = new JLabel("¿COMO CREAR UN USUARIO?");
+	    titulo.setBounds(20,30,460,30);
+	    titulo.setFont(new Font("Arial",Font.BOLD,22));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
+
+	    JTextArea texto = new JTextArea();
+	    texto.setBounds(50,100,400,150);
+	    texto.setText(
+	        "Para crear un usuario:\n" +
+	        "1. Ve al menu 'Cuenta' y selecciona 'Registro'.\n" +
+	        "2. Ingresa un nombre de usuario valido.\n" +
+	        "3. Escribe una contraseña segura.\n" +
+	        "4. Completa los campos adicionales.\n" +
+	        "5. Presiona el boton 'Crear cuenta'."
+	    );
+	    texto.setEditable(false);
+	    contenedor.add(texto);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,300,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
+	}
+	
+	public void entrar() {
+
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#CF382D")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
+
+	    JLabel titulo = new JLabel("¿COMO ACCEDER AL SISTEMA?");
+	    titulo.setBounds(20,30,460,30);
+	    titulo.setFont(new Font("Arial",Font.BOLD,22));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
+
+	    JTextArea texto = new JTextArea();
+	    texto.setBounds(50,100,400,150);
+	    texto.setText(
+	        "Para acceder al sistema:\n" +
+	        "1. Ve a la opcion 'Login'.\n" +
+	        "2. Ingresa tu usuario.\n" +
+	        "3. Ingresa tu contraseña.\n" +
+	        "4. Presiona el boton 'Acceder'.\n" +
+	        "Si los datos son correctos, podras entrar al sistema.\n"
+	    );
+	    texto.setEditable(false);
+	    contenedor.add(texto);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,300,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
+	}
+	
+	public void olvide() {
+
+	    JPanel contenedor = new JPanel();
+	    contenedor.setBackground(Color.decode("#80389C")); 
+	    contenedor.setBounds(0,0,500,500);
+	    contenedor.setLayout(null);
+	    this.add(contenedor);
+
+	    JLabel titulo = new JLabel("¿OLVIDASTE TU CONTRASEÑA?");
+	    titulo.setBounds(20,30,460,30);
+	    titulo.setFont(new Font("Arial",Font.BOLD,22));
+	    titulo.setHorizontalAlignment(JLabel.CENTER);
+	    contenedor.add(titulo);
+
+	    JTextArea texto = new JTextArea();
+	    texto.setBounds(50,100,400,150);
+	    texto.setText(
+	        "Si olvidaste tu contraseña:\n" +
+	        "1. Ve a 'Recuperar cuenta'.\n" +
+	        "2. Ingresa tu correo electronico.\n" +
+	        "3. Sigue las instrucciones.\n" +
+	        "Recibiras indicaciones para restablecer tu contraseña.\n"
+	    );
+	    texto.setEditable(false);
+	    contenedor.add(texto);
+
+	    JButton volver = new JButton("Volver");
+	    volver.setBounds(100,300,300,40);
+	    volver.setBackground(Color.black);	  
+	    volver.setForeground(Color.white);	
+	    contenedor.add(volver);
+
+	    volver.addActionListener(e -> this.router("login"));
+
+	    contenedor.repaint();
+	    contenedor.revalidate();
 	}
 	
 	public void marioBros() {
