@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class Ventana extends JFrame{
 	
@@ -16,12 +17,12 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(1000,550);
+		this.setSize(614,637);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
 		this.setMaximumSize(new Dimension(800,800));
-		this.setTitle("LOGIN");
+		this.setTitle("Juego del Gato X vs O");
 		this.setLocation(200,100);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -32,9 +33,11 @@ public class Ventana extends JFrame{
 		Image imgEscalada = img.getScaledInstance(64,64,Image.SCALE_SMOOTH);
 		this.setIconImage(imgEscalada);
 		
-		this.menu();
+		//this.menu();
 
-		this.router("login");
+		//this.router("login");
+		
+		this.tiktaktoe();
 		
 		this.setVisible(true);
 		
@@ -1647,6 +1650,98 @@ public class Ventana extends JFrame{
 
 	    add(acciones, BorderLayout.SOUTH);
 	    
+	}
+	
+	public void tiktaktoe() {
+		
+		JPanel panel = new JPanel();
+        panel.setSize(600, 600);
+        panel.setLocation(0, 0);
+        panel.setBackground(Color.decode("#B541D1"));
+        panel.setLayout(new GridLayout(3, 3, 5, 5));
+
+        this.add(panel);
+
+        Font fuente = new Font("Arial", Font.BOLD, 120);
+
+        JButton b1 = new JButton("X"); 
+        b1.setFont(fuente);
+        b1.setBackground(Color.decode("#2B2A2A"));
+        b1.setForeground(Color.decode("#00BFFF")); 
+        b1.setFocusPainted(false);
+        panel.add(b1);
+
+        JButton b2 = new JButton("O"); 
+        b2.setFont(fuente);
+        b2.setBackground(Color.decode("#2B2A2A"));
+        b2.setForeground(Color.decode("#FF4C4C")); 
+        b2.setFocusPainted(false);
+        panel.add(b2);
+
+        JButton b3 = new JButton();
+        b3.setFont(fuente);
+        b3.setBackground(Color.decode("#2B2A2A"));
+        b3.setForeground(Color.WHITE);
+        b3.setFocusPainted(false);
+        panel.add(b3);
+
+        JButton b4 = new JButton();
+        b4.setFont(fuente);
+        b4.setBackground(Color.decode("#2B2A2A"));
+        b4.setForeground(Color.WHITE);
+        b4.setFocusPainted(false);
+        panel.add(b4);
+
+        JButton b5 = new JButton();
+        b5.setFont(fuente);
+        b5.setBackground(Color.decode("#2B2A2A"));
+        b5.setForeground(Color.WHITE);
+        b5.setFocusPainted(false);
+        panel.add(b5);
+
+        JButton b6 = new JButton();
+        b6.setFont(fuente);
+        b6.setBackground(Color.decode("#2B2A2A"));
+        b6.setForeground(Color.WHITE);
+        b6.setFocusPainted(false);
+        panel.add(b6);
+
+        JButton b7 = new JButton();
+        b7.setFont(fuente);
+        b7.setBackground(Color.decode("#2B2A2A"));
+        b7.setForeground(Color.WHITE);
+        b7.setFocusPainted(false);
+        panel.add(b7);
+
+        JButton b8 = new JButton();
+        b8.setFont(fuente);
+        b8.setBackground(Color.decode("#2B2A2A"));
+        b8.setForeground(Color.WHITE);
+        b8.setFocusPainted(false);
+        panel.add(b8);
+
+        JButton b9 = new JButton();
+        b9.setFont(fuente);
+        b9.setBackground(Color.decode("#2B2A2A"));
+        b9.setForeground(Color.WHITE);
+        b9.setFocusPainted(false);
+        panel.add(b9);
+        
+        Border borde = BorderFactory.createLineBorder(Color.decode("#FFFFFF"), 4);
+
+        b1.setBorder(borde);
+        b2.setBorder(borde);
+        b3.setBorder(borde);
+        b4.setBorder(borde);
+        b5.setBorder(borde);
+        b6.setBorder(borde);
+        b7.setBorder(borde);
+        b8.setBorder(borde);
+        b9.setBorder(borde);
+
+        panel.repaint();
+        panel.revalidate();
+		
 	}
 	
 }
