@@ -17,13 +17,13 @@ public class Ventana extends JFrame{
 		
 		//configuracion de ventana
 		
-		this.setSize(614,637);
+		this.setSize(615,555);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(200,200));
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("Juego del Gato X vs O");
-		this.setLocation(200,100);
+		this.setLocation(200,25);
 		this.setResizable(false);
 		this.setLayout(null);
 		
@@ -1653,95 +1653,170 @@ public class Ventana extends JFrame{
 	}
 	
 	public void tiktaktoe() {
-		
+
 		JPanel panel = new JPanel();
-        panel.setSize(600, 600);
-        panel.setLocation(0, 0);
-        panel.setBackground(Color.decode("#B541D1"));
-        panel.setLayout(new GridLayout(3, 3, 5, 5));
+	    panel.setBounds(0, 70, 600, 450); 
+	    panel.setLayout(new GridLayout(3, 3, 5, 5));
+	    panel.setBackground(Color.decode("#B541D1"));
+	    this.add(panel);
 
-        this.add(panel);
+	    Font fuente = new Font("Arial", Font.BOLD, 100);
 
-        Font fuente = new Font("Arial", Font.BOLD, 120);
+	    Border borde = BorderFactory.createLineBorder(Color.WHITE, 4);
 
-        JButton b1 = new JButton("X"); 
-        b1.setFont(fuente);
-        b1.setBackground(Color.decode("#2B2A2A"));
-        b1.setForeground(Color.decode("#00BFFF")); 
-        b1.setFocusPainted(false);
-        panel.add(b1);
+	    for (int i = 0; i < 3; i++) {
+	        for (int j = 0; j < 3; j++) {
 
-        JButton b2 = new JButton("O"); 
-        b2.setFont(fuente);
-        b2.setBackground(Color.decode("#2B2A2A"));
-        b2.setForeground(Color.decode("#FF4C4C")); 
-        b2.setFocusPainted(false);
-        panel.add(b2);
+	            BotonGato boton = new BotonGato(i, j);
+	            boton.setFont(fuente);
+	            boton.setBackground(Color.BLACK);
+	            boton.setForeground(Color.WHITE);
+	            boton.setBorder(borde);
+	            boton.setFocusPainted(false);
 
-        JButton b3 = new JButton();
-        b3.setFont(fuente);
-        b3.setBackground(Color.decode("#2B2A2A"));
-        b3.setForeground(Color.WHITE);
-        b3.setFocusPainted(false);
-        panel.add(b3);
+	            boton.addActionListener(e -> jugar(boton));
 
-        JButton b4 = new JButton();
-        b4.setFont(fuente);
-        b4.setBackground(Color.decode("#2B2A2A"));
-        b4.setForeground(Color.WHITE);
-        b4.setFocusPainted(false);
-        panel.add(b4);
+	            tablero[i][j] = boton;
+	            panel.add(boton);
+	        }
+	    }
 
-        JButton b5 = new JButton();
-        b5.setFont(fuente);
-        b5.setBackground(Color.decode("#2B2A2A"));
-        b5.setForeground(Color.WHITE);
-        b5.setFocusPainted(false);
-        panel.add(b5);
+	    this.setLayout(null);
 
-        JButton b6 = new JButton();
-        b6.setFont(fuente);
-        b6.setBackground(Color.decode("#2B2A2A"));
-        b6.setForeground(Color.WHITE);
-        b6.setFocusPainted(false);
-        panel.add(b6);
+	    marcadorX = new JLabel("Jugador X: 0");
+	    marcadorX.setBounds(200, 20, 150, 30);
+	    marcadorX.setFont(new Font("Arial", Font.BOLD, 18));
+	    marcadorX.setForeground(Color.BLACK);
+	    this.add(marcadorX);
 
-        JButton b7 = new JButton();
-        b7.setFont(fuente);
-        b7.setBackground(Color.decode("#2B2A2A"));
-        b7.setForeground(Color.WHITE);
-        b7.setFocusPainted(false);
-        panel.add(b7);
+	    marcadorO = new JLabel("Jugador O: 0");
+	    marcadorO.setBounds(400, 20, 150, 30);
+	    marcadorO.setFont(new Font("Arial", Font.BOLD, 18));
+	    marcadorO.setForeground(Color.BLACK);
+	    this.add(marcadorO);
 
-        JButton b8 = new JButton();
-        b8.setFont(fuente);
-        b8.setBackground(Color.decode("#2B2A2A"));
-        b8.setForeground(Color.WHITE);
-        b8.setFocusPainted(false);
-        panel.add(b8);
+	    JButton reiniciar = new JButton("Reiniciar");
+	    reiniciar.setBounds(20, 20, 150, 40);
+	    reiniciar.setBackground(Color.BLACK);
+	    reiniciar.setForeground(Color.WHITE);
+	    reiniciar.setFocusPainted(false);
 
-        JButton b9 = new JButton();
-        b9.setFont(fuente);
-        b9.setBackground(Color.decode("#2B2A2A"));
-        b9.setForeground(Color.WHITE);
-        b9.setFocusPainted(false);
-        panel.add(b9);
-        
-        Border borde = BorderFactory.createLineBorder(Color.decode("#FFFFFF"), 4);
+	    reiniciar.addActionListener(e -> reiniciarJuego());
 
-        b1.setBorder(borde);
-        b2.setBorder(borde);
-        b3.setBorder(borde);
-        b4.setBorder(borde);
-        b5.setBorder(borde);
-        b6.setBorder(borde);
-        b7.setBorder(borde);
-        b8.setBorder(borde);
-        b9.setBorder(borde);
+	    this.add(reiniciar);
 
-        panel.repaint();
-        panel.revalidate();
-		
+	    this.repaint();
 	}
+	
+	public void jugar(BotonGato boton) {
+
+	    if (!boton.valor.equals("")) {
+	    	return;
+	    }
+
+	    boton.setText(turno);
+	    boton.valor = turno;
+
+	    if (turno.equals("X")) {
+	        boton.setForeground(Color.CYAN);
+	    } 
+	    else {
+	        boton.setForeground(Color.RED);
+	    }
+
+	    if (verificarGanador()) {
+	        JOptionPane.showMessageDialog(null, "Gano " + turno);
+
+	        if (turno.equals("X")) {
+	            puntosX++;
+	            marcadorX.setText("Jugador X: " + puntosX);
+	        } 
+	        else {
+	            puntosO++;
+	            marcadorO.setText("Jugador O: " + puntosO);
+	        }
+
+	        reiniciarTablero();
+	        return;
+	    }
+
+	    if (empate()) {
+	        JOptionPane.showMessageDialog(null, "Empate");
+	        reiniciarTablero();
+	        return;
+	    }
+
+	    turno = turno.equals("X") ? "O" : "X";
+	}
+	
+	public boolean verificarGanador() {
+
+	    // Filas y columnas
+	    for (int i = 0; i < 3; i++) {
+	        if (!tablero[i][0].valor.equals("") &&
+	            tablero[i][0].valor.equals(tablero[i][1].valor) &&
+	            tablero[i][1].valor.equals(tablero[i][2].valor)) {
+	            return true;
+	        }
+
+	        if (!tablero[0][i].valor.equals("") &&
+	            tablero[0][i].valor.equals(tablero[1][i].valor) &&
+	            tablero[1][i].valor.equals(tablero[2][i].valor)) {
+	            return true;
+	        }
+	    }
+
+	    // Diagonales
+	    if (!tablero[0][0].valor.equals("") &&
+	        tablero[0][0].valor.equals(tablero[1][1].valor) &&
+	        tablero[1][1].valor.equals(tablero[2][2].valor)) {
+	        return true;
+	    }
+
+	    if (!tablero[0][2].valor.equals("") &&
+	        tablero[0][2].valor.equals(tablero[1][1].valor) &&
+	        tablero[1][1].valor.equals(tablero[2][0].valor)) {
+	        return true;
+	    }
+
+	    return false;
+	}
+	
+	public boolean empate() {
+	    for (int i = 0; i < 3; i++) {
+	        for (int j = 0; j < 3; j++) {
+	            if (tablero[i][j].valor.equals("")) {
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
+	
+	public void reiniciarTablero() {
+	    for (int i = 0; i < 3; i++) {
+	        for (int j = 0; j < 3; j++) {
+	            tablero[i][j].setText("");
+	            tablero[i][j].valor = "";
+	        }
+	    }
+	    turno = "X";
+	}
+
+	public void reiniciarJuego() {
+	    reiniciarTablero();
+	    puntosX = 0;
+	    puntosO = 0;
+	    marcadorX.setText("Jugador X: 0");
+	    marcadorO.setText("Jugador O: 0");
+	}
+	
+	BotonGato[][] tablero = new BotonGato[3][3];
+	String turno = "X";
+
+	int puntosX = 0;
+	int puntosO = 0;
+
+	JLabel marcadorX, marcadorO;
 	
 }
