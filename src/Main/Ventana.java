@@ -37,7 +37,7 @@ public class Ventana extends JFrame{
 
 		//this.router("login");
 		
-		this.tiktaktoe();
+		//this.tiktaktoe();
 		
 		this.setVisible(true);
 		
