@@ -22,18 +22,21 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controllers.authControllers;
+
+
 public class authView {
 	
-	public void loginView() {	
+	public void loginView(authControllers controller) {	
 		
 		JFrame ventana = new JFrame();
 		
-		ventana.setSize(1000,535);
+		ventana.setSize(500,535);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setLocationRelativeTo(null);
 		ventana.setMinimumSize(new Dimension(200,200));
 		ventana.setMaximumSize(new Dimension(800,800));
-		ventana.setTitle("Login y registro");
+		ventana.setTitle("Login");
 		ventana.setLocation(200,25);
 		ventana.setResizable(false);
 		ventana.setLayout(null);
@@ -139,24 +142,28 @@ public class authView {
 		    String username_val = username.getText();
 		    String password_val = new String(password.getPassword());
 
-		    if(username_val.equals("") || username_val.contains(" ") || username_val.length() < 5) {
-		        username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-		        valido = false;
-		    } else {
-		        username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-		    }
-
-		    if(password_val.equals("") || password_val.length() < 5) {
-		        password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-		        valido = false;
-		    } else {
-		        password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-		    }
-
 		    if(valido) {
-		        JOptionPane.showMessageDialog(null, "Login exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+		        boolean acceso = controller.login(username_val, password_val);
+
+		        if(acceso) {
+		            username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+		            password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+
+		            JOptionPane.showMessageDialog(null, "Bienvenido");
+
+		            ventana.dispose();
+
+		            new homeView().showHome(); 
+		        }
+		        else {
+		        	username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+			        password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+		            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+		        }
+
 		    } else {
-		        JOptionPane.showMessageDialog(null, "Error en el login", "Error", JOptionPane.ERROR_MESSAGE);
+		        JOptionPane.showMessageDialog(null, "Error en los campos");
 		    }
 
 		});
@@ -173,7 +180,7 @@ public class authView {
 		registro.addActionListener(e->{
 			//ventana.router("registro");
 			ventana.dispose();
-			registerView();
+			controller.showRegister();
 		});
 		
 		JButton recuperar = new JButton("Desea recuperar la cuenta?");
@@ -197,16 +204,16 @@ public class authView {
 		ventana.setVisible(true);
 	}
 	
-	public void registerView() {
+	public void registerView(authControllers controller) {
 		
 		JFrame ventana = new JFrame();
 		
-		ventana.setSize(1000,535);
+		ventana.setSize(500,535);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setLocationRelativeTo(null);
 		ventana.setMinimumSize(new Dimension(200,200));
 		ventana.setMaximumSize(new Dimension(800,800));
-		ventana.setTitle("Juego del Gato X vs O");
+		ventana.setTitle("Registro");
 		ventana.setLocation(200,25);
 		ventana.setResizable(false);
 		ventana.setLayout(null);
@@ -214,7 +221,7 @@ public class authView {
 		//contenedor para el registro
 		JPanel register_container = new JPanel();
 		register_container.setSize(500,500);
-		register_container.setLocation(500,0);
+		register_container.setLocation(0,0);
 		register_container.setOpaque(true);
 		register_container.setBackground(Color.decode("#63A8C7"));
 		register_container.setLayout(null);
@@ -408,7 +415,7 @@ public class authView {
 		cancelar.addActionListener(e -> {
 		    //this.router("login");
 			ventana.dispose();
-			loginView();
+			controller.showLogin();
 		});
 		
 		register_container.repaint();
