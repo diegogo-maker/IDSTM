@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controllers.authControllers;
+import models.AuthModel;
 
 
 public class authView {
@@ -345,62 +346,55 @@ public class authView {
 		
 		crearCuenta.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				boolean valido = true;
+			    boolean valido = true;
 
-				String username_val = user_field.getText();
-				String bio_val = bio.getText();
+			    String username_val = user_field.getText();
+			    String pass_val = new String(pass_field.getPassword());
 
-				if(username_val.equals("") || username_val.contains(" ") || username_val.length() < 5) {
-					user_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-					valido = false;
-				}else{
-					user_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-				}
+			    if(username_val.equals("") || username_val.contains(" ")) {
+			    	user_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+			        valido = false;
+			    } 
+			    else {
+			    	user_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+			    }
 
-				if(!bio_val.equals("") && bio_val.length() < 5) {
-					bio.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-					valido = false;
-				}else{
-					bio.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-				}
+			    if(pass_val.equals("") || pass_val.length() < 5) {
 
-				if(!sweet_option.isSelected() && !salty_option.isSelected() && !healthy.isSelected()) {
-					sweet_option.setForeground(Color.red);
-					salty_option.setForeground(Color.red);
-					healthy.setForeground(Color.red);
-					valido = false;
-				}else{
-					sweet_option.setForeground(Color.green);
-					salty_option.setForeground(Color.green);
-					healthy.setForeground(Color.green);
-				}
+			        pass_field.setBorder(
+			            BorderFactory.createLineBorder(Color.red,3,true)
+			        );
 
-				if(!accept_terms.isSelected()) {
-					accept_terms.setForeground(Color.red);
-					reject_terms.setForeground(Color.red);
-					valido = false;
-				}else{
-					accept_terms.setForeground(Color.green);
-					reject_terms.setForeground(Color.black);
-				}
+			        valido = false;
 
-				if(valido) {
-					JOptionPane.showMessageDialog(null, "Registro exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
-				}else{
-					JOptionPane.showMessageDialog(null, "Error en el formulario", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				
-				String pass_val = new String(pass_field.getPassword());
+			    } 
+			    else {
+			    	pass_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+			    }
 
-				if(pass_val.equals("") || pass_val.length() < 5) {
-				    pass_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-				    valido = false;
-				} else {
-				    pass_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-				}
+			    if(valido) {
+
+			        AuthModel model = new AuthModel();
+
+			        boolean registrado =
+			                model.register(username_val, pass_val);
+
+			        if(registrado) {
+			            JOptionPane.showMessageDialog(null,"Registro exitoso");
+			            ventana.dispose();
+			            controller.showLogin();
+
+			        } 
+			        else {
+			        	JOptionPane.showMessageDialog(null,"Usuario ya existe");
+			        }
+
+			    } 
+			    else {
+			    	JOptionPane.showMessageDialog(null,"Error en formulario");
+			    }
 			}
 		});
 		
@@ -413,7 +407,6 @@ public class authView {
 		register_container.add(cancelar);
 
 		cancelar.addActionListener(e -> {
-		    //this.router("login");
 			ventana.dispose();
 			controller.showLogin();
 		});

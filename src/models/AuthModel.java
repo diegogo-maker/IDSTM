@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 public class AuthModel {
 
-    String URL = "jdbc:mysql://localhost:3308/conexion";
+    String URL = "jdbc:mysql://localhost:3308/programacion3";
     String USER = "root";
     String PASSWORD = "";
 
@@ -28,8 +28,9 @@ public class AuthModel {
 
         String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
 
-        try (Connection con = conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        try {
+        	Connection con = conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, email);
             ps.setString(2, password);
@@ -43,4 +44,28 @@ public class AuthModel {
             return false;
         }
     }
+    
+    public boolean register(String email, String password) {
+
+        String sql = "INSERT INTO usuarios(username,password) VALUES (?,?)";
+
+        try {
+            Connection con = conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+
+            System.out.println("Error register: " + e.getMessage());
+
+            return false;
+        }
+    }
+
 }
