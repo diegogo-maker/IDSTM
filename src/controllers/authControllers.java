@@ -29,7 +29,7 @@ public class authControllers {
     }
     
     public boolean register(String user, String pass) {
-        return modelo.register(user, pass);
+        return modelo.register(user, pass, pass, pass, pass);
     }
     
     public void home() {

@@ -3,416 +3,256 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controllers.UsersController;
 import controllers.authControllers;
 import models.AuthModel;
 
-
 public class authView {
-	
-	public void loginView(authControllers controller) {	
-		
-		JFrame ventana = new JFrame();
-		
-		ventana.setSize(500,535);
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setLocationRelativeTo(null);
-		ventana.setMinimumSize(new Dimension(200,200));
-		ventana.setMaximumSize(new Dimension(800,800));
-		ventana.setTitle("Login");
-		ventana.setLocation(200,25);
-		ventana.setResizable(false);
-		ventana.setLayout(null);
-		
-		// ===== PANEL LOGIN =====
-		JPanel contenedor = new JPanel();
-		contenedor.setBackground(Color.gray); 
-		contenedor.setBounds(0,0,500,500);
-		contenedor.setLayout(null);
-		ventana.add(contenedor);
 
+    public void loginView(authControllers controller) {
 
-		// ===== TITULO LOGIN =====
-		JLabel title_login = new JLabel("BEAR COMPANY");
-		title_login.setBounds(140,40,220,30);
-		title_login.setForeground(Color.decode("#333333"));
-		title_login.setFont(new Font("Serif",Font.ITALIC,30));
-		title_login.setHorizontalAlignment(JLabel.CENTER);
-		contenedor.add(title_login);
+        JFrame ventana = new JFrame();
 
+        ventana.setSize(500, 500);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setLocationRelativeTo(null);
+        ventana.setResizable(false);
+        ventana.setLayout(null);
+        ventana.setTitle("Login");
 
-		// ===== ICONO USUARIO =====
-		ImageIcon iconUser = new ImageIcon(getClass().getResource("/Main/Imagenes/user.png"));
-		Image imgUser = iconUser.getImage();
-		Image imgUserEscalada = imgUser.getScaledInstance(24, 24, Image.SCALE_SMOOTH);
-		ImageIcon iconUserEscalado = new ImageIcon(imgUserEscalada);
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 0, 500, 500);
+        panel.setBackground(Color.decode("#63A8C7"));
+        panel.setLayout(null);
+        ventana.add(panel);
 
-		JLabel iconoUser = new JLabel(iconUserEscalado);
-		iconoUser.setBounds(70,120,24,24);
-		contenedor.add(iconoUser);
+        JLabel title = new JLabel("LOGIN");
+        title.setBounds(100, 30, 300, 50);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setForeground(Color.WHITE);
+        panel.add(title);
 
+        JLabel email_label = new JLabel("Correo");
+        email_label.setBounds(60, 100, 380, 25);
+        email_label.setForeground(Color.WHITE);
+        email_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(email_label);
 
-		// ===== USUARIO =====
-		JLabel usuarioLabel = new JLabel("Usuario:");
-		usuarioLabel.setBounds(100,95,120,25);
-		usuarioLabel.setForeground(Color.decode("#333333"));
-		usuarioLabel.setFont(new Font("Arial", Font.ITALIC,16));
-		contenedor.add(usuarioLabel);
+        JTextField email_field = new JTextField();
+        email_field.setBounds(60, 130, 380, 40);
+        email_field.setFont(new Font("Arial", Font.PLAIN, 16));
+        panel.add(email_field);
 
-		JTextField username = new JTextField();
-		username.setBounds(100,120,300,30);
-		username.setFont(new Font("Arial",Font.BOLD,16));
-		username.setBorder(BorderFactory.createLineBorder(Color.decode("#CFCFCF")));
-		contenedor.add(username);
+        JLabel pass_label = new JLabel("Contraseña");
+        pass_label.setBounds(60, 190, 380, 25);
+        pass_label.setForeground(Color.WHITE);
+        pass_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(pass_label);
 
+        JPasswordField pass_field = new JPasswordField();
+        pass_field.setBounds(60, 220, 380, 40);
+        pass_field.setFont(new Font("Arial", Font.PLAIN, 16));
+        panel.add(pass_field);
 
-		// ===== ICONO PASSWORD =====
-		ImageIcon iconPass = new ImageIcon(getClass().getResource("/Main/Imagenes/elcandado.png"));
-		Image img = iconPass.getImage();
-		Image imgEscalada = img.getScaledInstance(24, 24, Image.SCALE_SMOOTH);
-		ImageIcon iconPassEscalado = new ImageIcon(imgEscalada);
+        JButton login = new JButton("ACCEDER");
+        login.setBounds(140, 300, 220, 50);
+        login.setFont(new Font("Arial", Font.BOLD, 18));
+        login.setBackground(Color.decode("#1B1461"));
+        login.setForeground(Color.WHITE);
+        panel.add(login);
 
-		JLabel iconoPass = new JLabel(iconPassEscalado);
-		iconoPass.setBounds(70,210,24,24);
-		contenedor.add(iconoPass);
+        login.addActionListener(e -> {
 
+            String email_val = email_field.getText();
+            String pass_val = new String(pass_field.getPassword());
 
-		// ===== CONTRASEÑA =====
-		JLabel Password = new JLabel("Contraseña:");
-		Password.setBounds(100,180,150,25);
-		Password.setForeground(Color.decode("#333333"));
-		Password.setFont(new Font("Arial", Font.ITALIC,16));
-		contenedor.add(Password);
+            boolean valido = true;
 
-		JPasswordField password = new JPasswordField();
-		password.setBounds(100,210,300,30);
-		password.setFont(new Font("Arial",Font.BOLD,16));
-		password.setBorder(BorderFactory.createLineBorder(Color.decode("#CFCFCF")));
-		contenedor.add(password);
+            if(email_val.equals("")) {
+                email_field.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+                valido = false;
+            } 
+            
+            else {
+            	email_field.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+            }
 
+            if(pass_val.equals("")) {
+                pass_field.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+                valido = false;
+            } 
+            else {
+                pass_field.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+            }
 
-		// ===== CHECKBOX =====
-		JCheckBox recordar = new JCheckBox("Recordarme");
-		recordar.setBounds(100,260,150,25);
-		recordar.setBackground(Color.decode("#F5F5F5"));
-		recordar.setForeground(Color.decode("#333333"));
-		recordar.setFont(new Font("Arial", Font.ITALIC,14));
-		contenedor.add(recordar);
+            if(valido) {
+                AuthModel model = new AuthModel();
 
+                boolean acceso = model.login(email_val, pass_val);
 
-		// ===== OLVIDE CONTRASEÑA =====
-		JLabel olvidar = new JLabel("¿Olvidaste tu contraseña?");
-		olvidar.setBounds(250,260,200,25);
-		olvidar.setForeground(Color.black);
-		olvidar.setFont(new Font("Arial", Font.BOLD,13));
-		contenedor.add(olvidar);
+                if(acceso) {
+                    JOptionPane.showMessageDialog(null,"Bienvenido");
+                    ventana.dispose();
+                    new UsersController().showUsers();
+                } 
+                else {
+                	JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectos");
+                }
+            }
+        });
 
+        JButton register = new JButton("Crear cuenta");
+        register.setBounds(140, 380, 220, 50);
+        register.setFont(new Font("Arial", Font.BOLD, 18));
+        register.setBackground(Color.decode("#206685"));
+        register.setForeground(Color.WHITE);
+        panel.add(register);
 
-		// ===== BOTON =====
-		JButton acceder = new JButton("ACCEDER");
-		acceder.setBounds(170,310,160,55);
-		acceder.setBackground(Color.decode("#2F2F2F"));
-		acceder.setForeground(Color.WHITE);
-		acceder.setFont(new Font("Arial",Font.BOLD,16));
-		acceder.setFocusPainted(false);
-		acceder.setBorder(BorderFactory.createLineBorder(Color.decode("#2F2F2F")));
-		contenedor.add(acceder);
-		
-		acceder.addActionListener(e -> {
+        register.addActionListener(e -> {
 
-		    boolean valido = true;
+            ventana.dispose();
 
-		    String username_val = username.getText();
-		    String password_val = new String(password.getPassword());
+            controller.showRegister();
+        });
 
-		    if(valido) {
+        ventana.setVisible(true);
+    }
 
-		        boolean acceso = controller.login(username_val, password_val);
+    public void registerView(authControllers controller) {
 
-		        if(acceso) {
-		            username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-		            password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+        JFrame ventana = new JFrame();
+        ventana.setSize(500, 700);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setLocationRelativeTo(null);
+        ventana.setResizable(false);
+        ventana.setLayout(null);
+        ventana.setTitle("Registro");
 
-		            JOptionPane.showMessageDialog(null, "Bienvenido");
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 0, 500, 700);
+        panel.setBackground(Color.decode("#63A8C7"));
+        panel.setLayout(null);
+        ventana.add(panel);
 
-		            ventana.dispose();
+        JLabel title = new JLabel("REGISTRO");
+        title.setBounds(100, 20, 300, 50);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setForeground(Color.WHITE);
+        panel.add(title);
 
-		            new homeView().showHome(); 
-		        }
-		        else {
-		        	username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-			        password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-		            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-		        }
+        JLabel name_label = new JLabel("Nombre");
+        name_label.setBounds(60, 90, 380, 25);
+        name_label.setForeground(Color.WHITE);
+        name_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(name_label);
 
-		    } else {
-		        JOptionPane.showMessageDialog(null, "Error en los campos");
-		    }
+        JTextField name_field = new JTextField();
+        name_field.setBounds(60, 120, 380, 40);
+        panel.add(name_field);
 
-		});
-		
-		JButton registro = new JButton("No tienes otra cuenta?");
-		registro.setLocation(100,380);
-		registro.setSize(300,50);
-		registro.setFont(new Font("Arial",Font.BOLD,22));
-		registro.setBackground(Color.black);
-		registro.setForeground(Color.white);
-		registro.setOpaque(true);
-		contenedor.add(registro);
-		
-		registro.addActionListener(e->{
-			//ventana.router("registro");
-			ventana.dispose();
-			controller.showRegister();
-		});
-		
-		JButton recuperar = new JButton("Desea recuperar la cuenta?");
-		recuperar.setLocation(50,440);
-		recuperar.setSize(400,50);
-		recuperar.setFont(new Font("Arial",Font.BOLD,22));
-		recuperar.setBackground(Color.black);
-		recuperar.setForeground(Color.white);
-		recuperar.setOpaque(true);
-		contenedor.add(recuperar);
-		
-		recuperar.addActionListener(e->{
-			//ventana.router("recuperar");
-			ventana.dispose();
-			//registerView();
-		});
+        JLabel lastname_label = new JLabel("Apellido");
+        lastname_label.setBounds(60, 180, 380, 25);
+        lastname_label.setForeground(Color.WHITE);
+        lastname_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(lastname_label);
 
-		contenedor.repaint();
-		contenedor.revalidate();
-		
-		ventana.setVisible(true);
-	}
-	
-	public void registerView(authControllers controller) {
-		
-		JFrame ventana = new JFrame();
-		
-		ventana.setSize(500,535);
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setLocationRelativeTo(null);
-		ventana.setMinimumSize(new Dimension(200,200));
-		ventana.setMaximumSize(new Dimension(800,800));
-		ventana.setTitle("Registro");
-		ventana.setLocation(200,25);
-		ventana.setResizable(false);
-		ventana.setLayout(null);
-		
-		//contenedor para el registro
-		JPanel register_container = new JPanel();
-		register_container.setSize(500,500);
-		register_container.setLocation(0,0);
-		register_container.setOpaque(true);
-		register_container.setBackground(Color.decode("#63A8C7"));
-		register_container.setLayout(null);
-		ventana.add(register_container);
-		
-		
-		JLabel titulo = new JLabel("REGISTRO");
-		titulo.setBounds(60,20,380,40);
-		titulo.setHorizontalAlignment(JLabel.CENTER);
-		titulo.setFont(new Font("Arial",Font.BOLD,26));
-		titulo.setForeground(Color.WHITE);
-		titulo.setOpaque(true);
-		titulo.setBackground(Color.decode("#1B1461"));
-		register_container.add(titulo);
+        JTextField lastname_field = new JTextField();
+        lastname_field.setBounds(60, 210, 380, 40);
+        panel.add(lastname_field);
 
-	
-		JLabel user_label = new JLabel("Nombre de usuario");
-		user_label.setBounds(60,65,380,25);
-		user_label.setHorizontalAlignment(JLabel.CENTER);
-		user_label.setForeground(Color.white);
-		user_label.setOpaque(true);
-		user_label.setBackground(Color.decode("#206685"));
-		user_label.setFont(new Font("Arial",Font.BOLD,22));
-		register_container.add(user_label);
+        JLabel email_label = new JLabel("Correo");
+        email_label.setBounds(60, 270, 380, 25);
+        email_label.setForeground(Color.WHITE);
+        email_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(email_label);
+        
+        JTextField email_field = new JTextField();
+        email_field.setBounds(60, 300, 380, 40);
+        panel.add(email_field);
+        
+        JLabel phone_label = new JLabel("Telefono");
+        phone_label.setBounds(60, 360, 380, 25);
+        phone_label.setForeground(Color.WHITE);
+        phone_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(phone_label);
 
-		JTextField user_field = new JTextField();
-		user_field.setBounds(60,95,380,35);
-		register_container.add(user_field);
-		user_field.setForeground(Color.black);
-	
-		JLabel pass_label = new JLabel("Contraseña");
-		pass_label.setBounds(60,135,380,25);
-		pass_label.setHorizontalAlignment(JLabel.CENTER);
-		pass_label.setForeground(Color.white);
-		pass_label.setOpaque(true);
-		pass_label.setBackground(Color.decode("#206685"));
-		pass_label.setFont(new Font("Arial",Font.BOLD,22));
-		register_container.add(pass_label);
+        JTextField phone_field = new JTextField();
+        phone_field.setBounds(60, 390, 380, 40);
+        panel.add(phone_field);
 
-		JPasswordField pass_field = new JPasswordField();
-		pass_field.setBounds(60,165,380,35);
-		pass_field.setForeground(Color.black);
-		register_container.add(pass_field);
-		
-		JLabel bio_tag = new JLabel("Biografia");
-		bio_tag.setBounds(60,200,380,25);
-		bio_tag.setBackground(Color.decode("#206685"));
-		bio_tag.setHorizontalAlignment(JLabel.CENTER);
-		bio_tag.setOpaque(true);
-		bio_tag.setFont(new Font("Arial",Font.BOLD,18));
-		register_container.add(bio_tag);
-		bio_tag.setForeground(Color.white);
+        JLabel pass_label = new JLabel("Contraseña");
+        pass_label.setBounds(60, 450, 380, 25);
+        pass_label.setForeground(Color.WHITE);
+        pass_label.setFont(new Font("Arial", Font.BOLD, 18));
+        panel.add(pass_label);
 
-		JTextArea bio = new JTextArea();
-		bio.setBounds(60,230,380,40);     
-		register_container.add(bio);
-		bio.setForeground(Color.black);
+        JPasswordField pass_field = new JPasswordField();
+        pass_field.setBounds(60, 480, 380, 40);
+        panel.add(pass_field);
 
-	
-		JLabel pref_label = new JLabel("Preferencias");
-		pref_label.setBounds(60,280,380,30);
-		pref_label.setHorizontalAlignment(JLabel.CENTER);
-		pref_label.setFont(new Font("Arial",Font.BOLD,18));
-		pref_label.setForeground(Color.white);
-		pref_label.setBackground(Color.decode("#206685"));
-		pref_label.setOpaque(true);
-		register_container.add(pref_label);
+        JButton register = new JButton("REGISTRAR");
+        register.setBounds(60, 570, 180, 50);
+        register.setFont(new Font("Arial", Font.BOLD, 18));
+        register.setBackground(Color.decode("#1B1461"));
+        register.setForeground(Color.WHITE);
 
-	
-		JCheckBox sweet_option = new JCheckBox("Dulce");
-		sweet_option.setBounds(60,310,120,25);
-		register_container.add(sweet_option);
-		sweet_option.setBackground(Color.decode("#63A8C7"));
-		sweet_option.setForeground(Color.black);
+        panel.add(register);
 
-		JCheckBox salty_option = new JCheckBox("Salado");
-		salty_option.setBounds(190,310,120,25);
-		register_container.add(salty_option);
-		salty_option.setBackground(Color.decode("#63A8C7"));
-		salty_option.setForeground(Color.black);
+        register.addActionListener(e -> {
 
-		JCheckBox healthy = new JCheckBox("Saludable");
-		healthy.setBounds(320,310,120,25);
-		register_container.add(healthy);
-		healthy.setBackground(Color.decode("#63A8C7"));
-		healthy.setForeground(Color.black);
+            String name_val = name_field.getText();
 
+            String lastname_val =
+                    lastname_field.getText();
 
-		JRadioButton accept_terms = new JRadioButton("Acepto terminos");
-		accept_terms.setBounds(60,385,170,30);
-		register_container.add(accept_terms);
-		accept_terms.setBackground(Color.decode("#63A8C7"));
-		accept_terms.setForeground(Color.black);
+            String email_val =
+                    email_field.getText();
 
-		JRadioButton reject_terms = new JRadioButton("Rechazo terminos");
-		reject_terms.setBounds(270,385,170,30);
-		register_container.add(reject_terms);
-		reject_terms.setBackground(Color.decode("#63A8C7"));
-		reject_terms.setForeground(Color.black);
+            String phone_val =
+                    phone_field.getText();
 
-		ButtonGroup terms = new ButtonGroup();
-		terms.add(accept_terms);
-		terms.add(reject_terms);
+            String pass_val =
+                    new String(pass_field.getPassword());
 
-	
-		String[] colonias = {"Camino real","Progreso","Miramar"};
-		JComboBox list = new JComboBox(colonias);
-		list.setBounds(60,345,380,35);
-		register_container.add(list);
-		list.setForeground(Color.black);
+            AuthModel model = new AuthModel();
 
+            boolean registrado = model.register(name_val,lastname_val,email_val,phone_val,pass_val);
 
-		JButton crearCuenta = new JButton("Crear cuenta");
-		crearCuenta.setBounds(60,425,180,50);
-		crearCuenta.setFont(new Font("Arial",Font.BOLD,16));
-		crearCuenta.setBackground(Color.decode("#1B1461"));
-		crearCuenta.setForeground(Color.white);
-		crearCuenta.setOpaque(true);
-		crearCuenta.setForeground(Color.white);
-		register_container.add(crearCuenta);
-		
-		crearCuenta.addActionListener(new ActionListener() {
+            if(registrado) {
+            	JOptionPane.showMessageDialog(null,"Registro exitoso");
+                ventana.dispose();
+                controller.showLogin();
+            } 
+            else {
+                JOptionPane.showMessageDialog(null,"El correo ya existe");
+            }
+        });
 
-			public void actionPerformed(ActionEvent e) {
+        JButton cancel = new JButton("CANCELAR");
+        cancel.setBounds(260, 570, 180, 50);
+        cancel.setFont(new Font("Arial", Font.BOLD, 18));
+        cancel.setBackground(Color.decode("#851111"));
+        cancel.setForeground(Color.WHITE);
 
-			    boolean valido = true;
+        panel.add(cancel);
 
-			    String username_val = user_field.getText();
-			    String pass_val = new String(pass_field.getPassword());
+        cancel.addActionListener(e -> {
+            ventana.dispose();
+            controller.showLogin();
+        });
 
-			    if(username_val.equals("") || username_val.contains(" ")) {
-			    	user_field.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-			        valido = false;
-			    } 
-			    else {
-			    	user_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-			    }
-
-			    if(pass_val.equals("") || pass_val.length() < 5) {
-
-			        pass_field.setBorder(
-			            BorderFactory.createLineBorder(Color.red,3,true)
-			        );
-
-			        valido = false;
-
-			    } 
-			    else {
-			    	pass_field.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
-			    }
-
-			    if(valido) {
-
-			        AuthModel model = new AuthModel();
-
-			        boolean registrado =
-			                model.register(username_val, pass_val);
-
-			        if(registrado) {
-			            JOptionPane.showMessageDialog(null,"Registro exitoso");
-			            ventana.dispose();
-			            controller.showLogin();
-
-			        } 
-			        else {
-			        	JOptionPane.showMessageDialog(null,"Usuario ya existe");
-			        }
-
-			    } 
-			    else {
-			    	JOptionPane.showMessageDialog(null,"Error en formulario");
-			    }
-			}
-		});
-		
-		JButton cancelar = new JButton("Cancelar");
-		cancelar.setBounds(260,425,180,50);
-		cancelar.setFont(new Font("Arial",Font.BOLD,16));
-		cancelar.setBackground(Color.decode("#851111")); 
-		cancelar.setForeground(Color.white);
-		cancelar.setOpaque(true);
-		register_container.add(cancelar);
-
-		cancelar.addActionListener(e -> {
-			ventana.dispose();
-			controller.showLogin();
-		});
-		
-		register_container.repaint();
-		
-		ventana.setVisible(true);
-	}
+        ventana.setVisible(true);
+    }
 }

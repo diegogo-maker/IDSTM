@@ -5,67 +5,91 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-// email: diego@gmail.com
-// contraseña: 12345678
-
 public class AuthModel {
 
     String URL = "jdbc:mysql://localhost:3308/programacion3";
     String USER = "root";
     String PASSWORD = "";
 
-    private Connection conectar() {
-        try {
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } 
-        catch (Exception e) {
-            System.out.println("Error conexion: " + e.getMessage());
-            return null;
-        }
-    }
-
     public boolean login(String email, String password) {
 
-        String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
 
         try {
-        	Connection con = conectar();
-            PreparedStatement ps = con.prepareStatement(sql);
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+            PreparedStatement ps = conn.prepareStatement(query);
 
             ps.setString(1, email);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
 
-            return rs.next();
+            boolean acceso = rs.next();
 
-        } catch (Exception e) {
-            System.out.println("Error login: " + e.getMessage());
-            return false;
+            rs.close();
+            ps.close();
+            conn.close();
+
+            return acceso;
+        } 
+        
+        catch(Exception e) {
+
+            e.printStackTrace();
         }
-    }
-    
-    public boolean register(String email, String password) {
 
-        String sql = "INSERT INTO usuarios(username,password) VALUES (?,?)";
+        return false;
+    }
+
+    public boolean register(String name,String lastname,String email,String phone,String password) {
+
+        String verify ="SELECT * FROM users WHERE email = ?";
+
+        String query ="INSERT INTO users(name, lastname, email, phone, password) VALUES(?,?,?,?,?)";
 
         try {
-            Connection con = conectar();
-            PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setString(1, email);
-            ps.setString(2, password);
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            int rowsAffected = ps.executeUpdate();
+            Connection conn =DriverManager.getConnection(URL, USER, PASSWORD);
 
-            return rowsAffected > 0;
+            PreparedStatement check = conn.prepareStatement(verify);
 
-        } catch (Exception e) {
+            check.setString(1, email);
 
-            System.out.println("Error register: " + e.getMessage());
+            ResultSet rs = check.executeQuery();
 
-            return false;
+            if(rs.next()) {
+
+                return false;
+            }
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, name);
+            ps.setString(2, lastname);
+            ps.setString(3, email);
+            ps.setString(4, phone);
+            ps.setString(5, password);
+
+            ps.executeUpdate();
+
+            ps.close();
+            check.close();
+            rs.close();
+            conn.close();
+
+            return true;
+
+        } catch(Exception e) {
+
+            e.printStackTrace();
         }
-    }
 
+        return false;
+    }
 }
