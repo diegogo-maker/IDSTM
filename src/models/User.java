@@ -1,5 +1,6 @@
 package models;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -124,5 +125,56 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    public boolean make(
+    	    String email,
+    	    String password,
+    	    String name,
+    	    String lastname,
+    	    String phone
+    	)  {
+
+        String query = "INSERT INTO users (email, password, name, lastname, phone) VALUES (?, ?, ?, ?, ?)";
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3308/programacion3",
+                "root",
+                ""
+            );
+
+            stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            stmt.setString(3, name);
+            stmt.setString(4, lastname);
+            stmt.setString(5, phone);
+
+            int rows = stmt.executeUpdate();
+
+            return rows > 0;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+
+        } finally {
+
+            try {
+
+                if(stmt != null) stmt.close();
+                if(conn != null) conn.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
