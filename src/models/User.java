@@ -43,9 +43,9 @@ public class User {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3308/programacion3",
-                    "root",
-                    ""
+                    "jdbc:mysql://sql.freedb.tech:3308/freedb_fnoFrnnL",
+                    "u_JUPIx1",
+                    "27dmhVh6vCHx"
             );
 
             PreparedStatement ps =
@@ -141,11 +141,13 @@ public class User {
         PreparedStatement stmt = null;
 
         try {
-
+        	
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+        	
             conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3308/programacion3",
-                "root",
-                ""
+                "jdbc:mysql://sql.freedb.tech:3308/freedb_fnoFrnnL",
+                "u_JUPIx1",
+                "27dmhVh6vCHx"
             );
 
             stmt = conn.prepareStatement(query);
